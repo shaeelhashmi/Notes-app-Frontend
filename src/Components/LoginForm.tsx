@@ -1,6 +1,6 @@
 import InputTags from './InputTags.tsx'
 import {Link} from 'react-router-dom'
-import React,{ FormEvent,useState } from 'react'
+import React,{ FormEvent,useEffect,useState } from 'react'
 
 export default function Registration() {
   const [error,setError]=useState('')
@@ -47,6 +47,9 @@ export default function Registration() {
       }
   })
   }
+  useEffect(() => {
+    setError('');
+  },[])
   return (
     <div className='flex items-center justify-center min-h-screen'>
     <div className='w-[400px] h-[360px] p-3  rounded-3xl bg-opacity-100 text-white border-[#0C0B0C] border-solid border-4'>

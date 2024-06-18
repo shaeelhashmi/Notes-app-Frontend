@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import InputTags from './InputTags.tsx';
-import React,{ FormEvent,useState } from 'react'
+import React,{ FormEvent,useState,useEffect } from 'react'
 export default function Registration() {
   const [error,setError]=useState('')
   const IsEmpty=(username:String,password:String):boolean=>{
@@ -43,10 +43,13 @@ export default function Registration() {
       if(data.message==="User Created"){
         window.location.href='/login'
       }
+      console.log(data)
       setError(data.message)
     })
   }
-
+  useEffect(() => {
+    setError('');
+  },[])
   return (
     <>
     <div className='flex items-center justify-center min-h-screen'>
