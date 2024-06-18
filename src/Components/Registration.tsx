@@ -29,6 +29,19 @@ export default function Registration() {
       setError('Username cannot be empty spaces')
       return;
     }
+    fetch('/register',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        username:username,
+        password:password
+      })
+    }).then(res => res.json())
+    .then(data => {
+      setError(data.message)
+    })
   }
 
   return (
@@ -44,7 +57,7 @@ export default function Registration() {
         <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
         <div className="flex">
         <button type="submit" className='w-[300px] h-[50px] bg-[#1e1c1e] mt-6 mx-auto  hover:bg-[#393639] transition-all duration-200 rounded-md'>SignUp</button>
-        <a href="/auth/google" className='mx-auto mt-6 ms-2 bg-[#1e1c1e] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#393639] transition-all duration-200'>Login with Google</a>  
+        <a href="/auth/google/callback" className='mx-auto mt-6 ms-2 bg-[#1e1c1e] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#393639] transition-all duration-200'>Login with Google</a>  
         </div>    
       </form>
       <Link to="/login" className='text-[0.6rem] mt-7'>Already have an account? Login</Link>

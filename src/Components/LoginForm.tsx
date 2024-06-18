@@ -55,7 +55,7 @@ export default function Registration() {
         <div className="flex">
           
         <button type="submit" className='w-[300px] h-[50px] bg-[#1e1c1e] mt-6 mx-auto  hover:bg-[#393639] transition-all duration-200 rounded-md'>Login</button>
-        <a href="/auth/google" className='mx-auto mt-6 ms-2 bg-[#1e1c1e] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#393639] transition-all duration-200'>Login with Google</a>  
+        <a href="/auth/google/callback" className='mx-auto mt-6 ms-2 bg-[#1e1c1e] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#393639] transition-all duration-200'>Login with Google</a>  
         </div>    
       </form>
       <Link to="/signup" className='text-[0.6rem] mt-10'>Already have an account? Signup</Link>
