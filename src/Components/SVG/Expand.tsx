@@ -1,8 +1,8 @@
 
 export default function Expand() {
 return (
-<div className="inline-block me-0 ms-2">
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none" >
+<>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none"  className="inline-block ">
 <mask id="mask0_25_32" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="28">
 <rect width="30" height="28" fill="#D9D9D9"/>
 </mask>
@@ -11,6 +11,6 @@ return (
 </g>
 </svg>
 
-</div>
+</>
   )
 }
