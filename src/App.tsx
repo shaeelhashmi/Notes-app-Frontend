@@ -6,9 +6,9 @@ import Registration from './Components/Registration'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 function App() {
   return (
-<Router basename="/">
+<Router >
       <Routes>
-       <Route path="/" element={<HomePage></HomePage>}></Route>
+       <Route path="/" element={<HomePage></HomePage>}/>
         <Route  path="/login" element={<LoginForm />}  />
         <Route  path="/signup" element={<Registration />}  />
       </Routes>

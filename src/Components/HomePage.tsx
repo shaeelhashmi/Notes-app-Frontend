@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import InputTags from './InputTags'
 import NavBar from './NavBar'
 import Plus from './SVG/Plus'
@@ -6,11 +6,24 @@ export default function HomePage() {
   const today: Date = new Date();
   const tomorrow: Date = new Date(today);
   tomorrow.setDate(today.getDate() + 1); // Add 1 day
-  
   const minDate: string = tomorrow.toISOString().split('T')[0]; // Get tomorrow's date in YYYY-MM-DD format
-  
-
   const [showPopup, setShowPopup] = useState(false)
+  const CheckLogin=():String=>{
+    fetch('/checklogin').then(res => res.json())
+    .then(data => {
+      if(data===undefined){
+        window.location.href='/login'
+        return "d";
+      }
+      return data;
+    }).catch(err => {
+      window.location.href='/login'
+    })
+    return "data";
+  }
+  useEffect(() => {
+    CheckLogin()
+  },[]);
   return (
     <>
       <NavBar></NavBar>

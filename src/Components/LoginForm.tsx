@@ -40,6 +40,10 @@ export default function Registration() {
   }).then(res => res.json())
   .then(data => {
     setError(data.message)
+    if(data.message==="Authenticated")
+      {
+        window.location.href='/';
+      }
   })
   }
   return (

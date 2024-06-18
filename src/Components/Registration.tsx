@@ -40,6 +40,9 @@ export default function Registration() {
       })
     }).then(res => res.json())
     .then(data => {
+      if(data.message==="User Created"){
+        window.location.href='/login'
+      }
       setError(data.message)
     })
   }
