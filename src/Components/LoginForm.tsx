@@ -1,6 +1,7 @@
 import InputTags from './InputTags.tsx'
 import {Link} from 'react-router-dom'
 import React,{ FormEvent,useState } from 'react'
+
 export default function Registration() {
   const [error,setError]=useState('')
   const IsEmpty=(username:String,password:String):boolean=>{
