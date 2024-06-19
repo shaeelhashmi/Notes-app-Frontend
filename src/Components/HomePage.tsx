@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler, useEffect, useState } from 'react';
+import { FormEvent, FormEventHandler, useEffect, useState, ChangeEvent } from 'react';
 import InputTags from './InputTags';
 import NavBar from './NavBar';
 import Plus from './SVG/Plus';
@@ -13,7 +13,21 @@ export default function HomePage() {
   const [username, setUsername] = useState(''); // State to store username
   const [loader, setLoader] = useState(false); // State to store loader
   const [error, setError] = useState(''); // State to store error message
-
+  const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
+    const size:number=e.currentTarget.value.length;
+    let value:string=e.currentTarget.value;
+    console.log(size,value)
+ for(let i=0;i<size-1;i++){
+    if(value[i]===" " && value[i+1]===" "){
+      value=value.slice(0,i)+value.slice(i+1);
+      e.currentTarget.value=value;
+    }
+ }
+  if(value[0]===" "){
+    value=value.slice(1);
+    e.currentTarget.value=value;
+   }
+  }
   const checkLogin = async () => {
     try {
       const res = await fetch('/checklogin',{method: 'POST', headers: { 'Content-Type': 'application/json' }});
@@ -99,12 +113,13 @@ export default function HomePage() {
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
           <div className="p-5 w-96 bg-[#0E0E0E] rounded-xl">
             <div className='h-3 text-center text-red-700'>{error}</div>
-            <form className="text-white" onSubmit={CreateNote} >
+            <form className="text-white"  onSubmit={CreateNote}>
               <InputTags
                 name="Category"
                 label="Category: "
                 type="text"
                 placeholder="Category"
+                function={CheckLetter}
                 required={true}
               />
               <InputTags
@@ -112,6 +127,7 @@ export default function HomePage() {
                 label="Title: "
                 type="text"
                 placeholder="Title"
+                function={CheckLetter}
                 required={true}
               />
               <div className="flex flex-col">
@@ -124,6 +140,7 @@ export default function HomePage() {
                     placeholder="Description"
                     name="description"
                     required
+                    onChange={CheckLetter}
                   />
                 </div>
               </div>

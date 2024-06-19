@@ -50,6 +50,10 @@ export default function Registration() {
   useEffect(() => {
     setError('');
   },[])
+  const handleChange = (e:React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.value = e.currentTarget.value.toLowerCase();
+    e.currentTarget.value = e.currentTarget.value.split(" ").join("");
+   }
   return (
     <>
     <div className='flex items-center justify-center min-h-screen'>
@@ -57,7 +61,7 @@ export default function Registration() {
       <h1 className='text-3xl text-center '>Sign Up</h1> 
       <form action="/register" method="post" onSubmit={Submit}>
         <div className='flex flex-col'> 
-          <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"}></InputTags>
+          <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange}></InputTags>
           <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"}></InputTags>
         </div> 
         <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
