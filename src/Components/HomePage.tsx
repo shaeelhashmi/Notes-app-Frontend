@@ -8,7 +8,6 @@ export default function HomePage() {
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1); // Add 1 day
   const minDate = tomorrow.toISOString().split('T')[0]; // Get tomorrow's date in YYYY-MM-DD format
-
   const [showPopup, setShowPopup] = useState(false);
   const [username, setUsername] = useState(''); // State to store username
   const [loader, setLoader] = useState(false); // State to store loader
@@ -28,6 +27,7 @@ export default function HomePage() {
     e.currentTarget.value=value;
    }
   }
+  let Notes;
   const checkLogin = async () => {
     try {
       const res = await fetch('/checklogin',{method: 'POST', headers: { 'Content-Type': 'application/json' }});
@@ -36,6 +36,8 @@ export default function HomePage() {
         window.location.href = '/login';
       } else {
         setUsername(data.username);
+        Notes=await getDateTime();
+        console.log(Notes)
         setLoader(false);
       }
     } catch (error) {
@@ -67,7 +69,6 @@ export default function HomePage() {
     else{
       data={category:category,title:title,description:description,CompletionDate:CompletionDate}
     }
-    console.log(data);
     try{
     const res=await fetch('/addnote', {
       method: 'POST',
@@ -84,6 +85,12 @@ export default function HomePage() {
   catch(error){
     setError('Internal server Error')
   }
+  }
+ 
+  const getDateTime = async ():Promise<any> => {
+    let res=await fetch("/userdata");
+    let value=await res.json();
+    return value;
   }
   useEffect(() => {
     checkLogin();
@@ -154,6 +161,7 @@ export default function HomePage() {
                     name="CompletionDate"
                     min={minDate}
                     className="h-26 w-[63%] p-3 text-sm bg-[#171617] border-l-0 border-r-0 border-t-0 border-b"
+                    required
                   />
                 </div>
               </div>
