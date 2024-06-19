@@ -35,7 +35,7 @@ export default function HomePage() {
       if (data === undefined) {
         window.location.href = '/login';
       } else {
-        setUsername(data);
+        setUsername(data.username);
         setLoader(false);
       }
     } catch (error) {
