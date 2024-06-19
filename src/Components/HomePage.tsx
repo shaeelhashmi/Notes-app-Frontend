@@ -74,6 +74,9 @@ export default function HomePage() {
   useEffect(() => {
     checkLogin();
     setError('');
+    setShowPopup(false);
+    setUsername('');
+    setLoader(true);
   }, []);
   return (
 
