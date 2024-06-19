@@ -11,7 +11,11 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState(false);
   const [username, setUsername] = useState(''); // State to store username
   const [loader, setLoader] = useState(false); // State to store loader
-  const [error, setError] = useState(''); // State to store error message
+  const [error, setError] = useState(''); // State to store error messages
+  const [notes,setNotes]=useState([]); // State to store notes
+  const LimitText=(words:String):String=>{
+    return words.slice(0,300);
+  }
   const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const size:number=e.currentTarget.value.length;
     let value:string=e.currentTarget.value;
@@ -27,7 +31,7 @@ export default function HomePage() {
     e.currentTarget.value=value;
    }
   }
-  let Notes;
+  let Notes:any;
   const checkLogin = async () => {
     try {
       const res = await fetch('/checklogin',{method: 'POST', headers: { 'Content-Type': 'application/json' }});
@@ -38,6 +42,7 @@ export default function HomePage() {
         setUsername(data.username);
         Notes=await getDateTime();
         console.log(Notes)
+        setNotes(Notes);
         setLoader(false);
       }
     } catch (error) {
@@ -190,8 +195,36 @@ export default function HomePage() {
           </div>
         </div>
       )}
-      </>
+      </>   
 }
+
+
+  {
+    notes.map((Notes: any)=>(<div className="flex flex-col text-white notes-container bg-[#2E2B2B]  mx-auto rounded-[80px] w-[95%]" key={Notes._id}>
+<div className="grid justify-between grid-cols-2 ">
+  <div className="text-xl text-end md:text-2xl ">{Notes.title}</div>
+  <div className="flex justify-end items-center text-[0.6rem] font-[50] me-12">{new Date(Notes.timeOfCompletion).toLocaleDateString()}</div>
+</div>
+  <div className='setgrid'>
+  <div className=' md:text-base text-centre text-[0.7rem] ms-7'>{LimitText(Notes.content)} view more... </div>
+  <div className='lg:text-[0.75rem] text-[0.6rem] text-end  me-8'>{Notes.category}</div>
+  </div>
+  <div className='flex justify-center'>
+  <button onClick={() => console.log(Notes._id)} className='w-[100px] bg-green-950 rounded-lg mt-3 h-10 mb-2 mr-2 hover:bg-green-900 duration-500 transition-all hover:shadow-md hover:shadow-black'>View Note</button>
+  <button onClick={() => console.log(Notes._id)} className='w-[100px] bg-red-950 rounded-lg mt-3 h-10 mb-2 hover:bg-red-900 duration-500 transition-all hover:shadow-md hover:shadow-black'>Delete</button>
+</div>
+    
+    </div>))
+  /* {notes.map((Notes: any) => (
+    <div key={Notes._id} className="note">
+      <h3>{Notes.title}</h3>
+      <p>{Notes.category}</p>
+      <p>{Notes.content}</p>
+      <p>{new Date(Notes.timeOfCompletion).toLocaleDateString()}</p>
+      <button onClick={() => console.log(Notes._id)}>Delete</button>
+    </div>
+  ))} */}
+
     </>
   );
 }
