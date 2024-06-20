@@ -5,10 +5,3 @@ body
 {
     background-color: rgb(15, 14, 14);
 }
-.setgrid
-{
-    display: grid;
-    grid-template-columns: 85% 1fr;
-    margin: 0px;
-
-}

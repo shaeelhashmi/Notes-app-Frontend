@@ -3,6 +3,7 @@ import InputTags from './InputTags';
 import NavBar from './NavBar';
 import Plus from './SVG/Plus';
 import Loader from './Loader.tsx'
+import Box from '../Box.tsx';
 export default function HomePage() {
   const today = new Date();
   const tomorrow = new Date(today);
@@ -10,12 +11,13 @@ export default function HomePage() {
   const minDate = tomorrow.toISOString().split('T')[0]; // Get tomorrow's date in YYYY-MM-DD format
   const [showPopup, setShowPopup] = useState(false);
   const [username, setUsername] = useState(''); // State to store username
-  const [loader, setLoader] = useState(false); // State to store loader
+  const [loader, setLoader] = useState(true); // State to store loader
   const [error, setError] = useState(''); // State to store error messages
-  const [notes,setNotes]=useState([]); // State to store notes
-  const LimitText=(words:String):String=>{
-    return words.slice(0,300);
-  }
+  const [notes,setNotes]=useState<any>([]); // State to store notes
+  const [Fetch,setFetch]=useState(false); // State to store fetch
+  // const LimitText=(words:String):String=>{
+  //   return words.slice(0,200);
+  // }
   const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const size:number=e.currentTarget.value.length;
     let value:string=e.currentTarget.value;
@@ -31,7 +33,7 @@ export default function HomePage() {
     e.currentTarget.value=value;
    }
   }
-  let Notes:any;
+  let Notes:any[];
   const checkLogin = async () => {
     try {
       const res = await fetch('/checklogin',{method: 'POST', headers: { 'Content-Type': 'application/json' }});
@@ -41,9 +43,8 @@ export default function HomePage() {
       } else {
         setUsername(data.username);
         Notes=await getDateTime();
-        console.log(Notes)
-        setNotes(Notes);
-        setLoader(false);
+        setNotes(Notes); // Update the notes state with the fetched data
+        console.log(notes);
       }
     } catch (error) {
       setLoader(true);
@@ -68,12 +69,7 @@ export default function HomePage() {
       setError('Please fill all the fields');
       return;
     }
-    if(CompletionDate.trim().length===0){
-      data={category:category,title:title,description:description}
-    }
-    else{
-      data={category:category,title:title,description:description,CompletionDate:CompletionDate}
-    }
+      data={category:category.trim(),title:title.trim(),description:description.trim(),CompletionDate:CompletionDate}
     try{
     const res=await fetch('/addnote', {
       method: 'POST',
@@ -98,6 +94,13 @@ export default function HomePage() {
     return value;
   }
   useEffect(() => {
+
+    (async () => {
+      await checkLogin();
+      console.log(notes)
+      setLoader(false);
+      setFetch(true);
+    })();
     checkLogin();
     setError('');
     setShowPopup(false);
@@ -108,7 +111,8 @@ export default function HomePage() {
 
     <>
     {
-      loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader></Loader></div>:
+      loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
+      :
     <>
       <NavBar username={username} />
       <div
@@ -194,36 +198,30 @@ export default function HomePage() {
             </form>
           </div>
         </div>
+                
       )}
       </>   
 }
-
-
+<div  className='text-white'>
   {
-    notes.map((Notes: any)=>(<div className="flex flex-col text-white notes-container bg-[#2E2B2B]  mx-auto rounded-[80px] w-[95%]" key={Notes._id}>
-<div className="grid justify-between grid-cols-2 ">
-  <div className="text-xl text-end md:text-2xl ">{Notes.title}</div>
-  <div className="flex justify-end items-center text-[0.6rem] font-[50] me-12">{new Date(Notes.timeOfCompletion).toLocaleDateString()}</div>
+    Fetch&&notes.map((note:any)=>(
+      <>
+       <h1 className='text-xl text-center'>Category</h1>
+       <div className='grid items-center justify-center gap-16 p-4 mt-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 place-items-center place-content-center'>
+      {note.Notes.map((note:any)=>(
+        <>
+        <Box Title={note.title} description={note.description} />
+        </>
+      ))
+    }
+      </div>
+      </>
+  
+    )
+    )
+  }
 </div>
-  <div className='setgrid'>
-  <div className=' md:text-base text-centre text-[0.7rem] ms-7'>{LimitText(Notes.content)} view more... </div>
-  <div className='lg:text-[0.75rem] text-[0.6rem] text-end  me-8'>{Notes.category}</div>
-  </div>
-  <div className='flex justify-center'>
-  <button onClick={() => console.log(Notes._id)} className='w-[100px] bg-green-950 rounded-lg mt-3 h-10 mb-2 mr-2 hover:bg-green-900 duration-500 transition-all hover:shadow-md hover:shadow-black'>View Note</button>
-  <button onClick={() => console.log(Notes._id)} className='w-[100px] bg-red-950 rounded-lg mt-3 h-10 mb-2 hover:bg-red-900 duration-500 transition-all hover:shadow-md hover:shadow-black'>Delete</button>
-</div>
-    
-    </div>))
-  /* {notes.map((Notes: any) => (
-    <div key={Notes._id} className="note">
-      <h3>{Notes.title}</h3>
-      <p>{Notes.category}</p>
-      <p>{Notes.content}</p>
-      <p>{new Date(Notes.timeOfCompletion).toLocaleDateString()}</p>
-      <button onClick={() => console.log(Notes._id)}>Delete</button>
-    </div>
-  ))} */}
+
 
     </>
   );
