@@ -7,7 +7,6 @@ import Box from '../Box.tsx';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
-  const selector=useSelector((state:any)=>state.Login)
   const selector1=useSelector((state:any)=>state.getUserName)
   const selector2=useSelector((state:any)=>state.Check)
   const navigate=useNavigate();
@@ -116,13 +115,10 @@ export default function HomePage() {
   }
   useEffect(() => {
    if(selector2.value){
-    console.log(selector)
-    if(selector.value===false){
-      navigate('/login');
-    }
+console.log(selector2.value)
     setUsername(selector1.name);
   }
-  },[selector,selector1,selector2])
+  },[selector1,selector2])
   useEffect(() => {
    
     (async () => {
@@ -141,7 +137,7 @@ export default function HomePage() {
 
     <>
     {
-      loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
+      loader&&selector2.value? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
       :
     <>
       <NavBar username={username} />
