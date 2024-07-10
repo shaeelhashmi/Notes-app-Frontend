@@ -4,7 +4,13 @@ import NavBar from './NavBar';
 import Plus from './SVG/Plus';
 import Loader from './Loader.tsx'
 import Box from '../Box.tsx';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
+  const selector=useSelector((state:any)=>state.Login)
+  const selector1=useSelector((state:any)=>state.getUserName)
+  const selector2=useSelector((state:any)=>state.Check)
+  const navigate=useNavigate();
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1); // Add 1 day
@@ -15,13 +21,26 @@ export default function HomePage() {
   const [error, setError] = useState(''); // State to store error messages
   const [notes,setNotes]=useState<any>([]); // State to store notes
   const [Fetch,setFetch]=useState(false); // State to store fetch
-  // const LimitText=(words:String):String=>{
-  //   return words.slice(0,200);
-  // }
+  const LimitText=(words:String):String=>{
+    return words.slice(0,200);
+  }
+  const Color=(index:number):String=>{
+    if(index%4===0){
+      return 'bg-[#055526]'
+    }
+    else if(index%4===1){
+      return 'bg-[#85100e]'
+    }
+    else if(index%4===2){
+      return 'bg-[#30005d]'
+    }
+    else{
+      return 'bg-[#0d1234]'
+    }
+  }
   const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const size:number=e.currentTarget.value.length;
     let value:string=e.currentTarget.value;
-    console.log(size,value)
  for(let i=0;i<size-1;i++){
     if(value[i]===" " && value[i+1]===" "){
       value=value.slice(0,i)+value.slice(i+1);
@@ -36,19 +55,12 @@ export default function HomePage() {
   let Notes:any[];
   const checkLogin = async () => {
     try {
-      const res = await fetch('/checklogin',{method: 'POST', headers: { 'Content-Type': 'application/json' }});
-      const data = await res.json();
-      if (data === undefined) {
-        window.location.href = '/login';
-      } else {
-        setUsername(data.username);
         Notes=await getDateTime();
         setNotes(Notes); // Update the notes state with the fetched data
-        console.log(notes);
-      }
-    } catch (error) {
+      
+    } catch {
       setLoader(true);
-       window.location.href = '/login';
+       navigate('/login');
     } 
   };
   const CreateNote:FormEventHandler<HTMLFormElement>= async (e:FormEvent<HTMLFormElement>) => {
@@ -89,15 +101,33 @@ export default function HomePage() {
   }
  
   const getDateTime = async ():Promise<any> => {
-    let res=await fetch("/userdata");
+    try{
+      let res=await fetch("/userdata");
+      if(!res.ok){
+        navigate('/login');
+      }
     let value=await res.json();
     return value;
+    }catch(error){
+      console.log(error)
+     navigate('/login');
+    }
+    
   }
   useEffect(() => {
-
+   if(selector2.value){
+    console.log(selector)
+    if(selector.value===false){
+      navigate('/login');
+    }
+    setUsername(selector1.name);
+  }
+  },[selector,selector1,selector2])
+  useEffect(() => {
+   
     (async () => {
       await checkLogin();
-      console.log(notes)
+      
       setLoader(false);
       setFetch(true);
     })();
@@ -200,17 +230,19 @@ export default function HomePage() {
         </div>
                 
       )}
+      <h1 className='text-4xl text-white ms-7'>Your Notes</h1>
       </>   
 }
+
 <div  className='text-white'>
   {
     Fetch&&notes.map((note:any)=>(
       <>
-       <h1 className='text-xl text-center'>Category</h1>
+       <h1 className='text-2xl text-center'>{note.category}</h1>
        <div className='grid items-center justify-center gap-16 p-4 mt-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 place-items-center place-content-center'>
-      {note.Notes.map((note:any)=>(
+      {note.Notes.map((note:any,index:number)=>(
         <>
-        <Box Title={note.title} description={note.description} />
+        <Box Title={note.title} description={LimitText(note.content)}  Color={Color(index)}/>
         </>
       ))
     }

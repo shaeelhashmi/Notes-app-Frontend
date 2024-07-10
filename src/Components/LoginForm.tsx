@@ -1,7 +1,6 @@
 import InputTags from './InputTags.tsx'
 import {Link} from 'react-router-dom'
 import React,{ FormEvent,useEffect,useState } from 'react'
-
 export default function Registration() {
   const [error,setError]=useState('')
   const IsEmpty=(username:String,password:String):boolean=>{
@@ -43,7 +42,7 @@ export default function Registration() {
     setError(data.message)
     if(data.message==="Authenticated")
       {
-        window.location.href='/';
+        location.reload();
       }
   })
   }
