@@ -3,7 +3,7 @@ import InputTags from './InputTags';
 import NavBar from './NavBar';
 import Plus from './SVG/Plus';
 import Loader from './Loader.tsx'
-import Box from '../Box.tsx';
+import Box from './Box.tsx';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
@@ -19,24 +19,7 @@ export default function HomePage() {
   const [loader, setLoader] = useState(true); // State to store loader
   const [error, setError] = useState(''); // State to store error messages
   const [notes,setNotes]=useState<any>([]); // State to store notes
-  const [Fetch,setFetch]=useState(false); // State to store fetch
-  const LimitText=(words:String):String=>{
-    return words.slice(0,200);
-  }
-  const Color=(index:number):String=>{
-    if(index%4===0){
-      return 'bg-[#055526]'
-    }
-    else if(index%4===1){
-      return 'bg-[#85100e]'
-    }
-    else if(index%4===2){
-      return 'bg-[#30005d]'
-    }
-    else{
-      return 'bg-[#0d1234]'
-    }
-  }
+ // State to store fetch
   const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const size:number=e.currentTarget.value.length;
     let value:string=e.currentTarget.value;
@@ -108,14 +91,12 @@ export default function HomePage() {
     let value=await res.json();
     return value;
     }catch(error){
-      console.log(error)
      navigate('/login');
     }
     
   }
   useEffect(() => {
    if(selector2.value){
-console.log(selector2.value)
     setUsername(selector1.name);
   }
   },[selector1,selector2])
@@ -125,7 +106,6 @@ console.log(selector2.value)
       await checkLogin();
       
       setLoader(false);
-      setFetch(true);
     })();
     checkLogin();
     setError('');
@@ -226,29 +206,14 @@ console.log(selector2.value)
         </div>
                 
       )}
-      <h1 className='text-4xl text-white ms-7'>Your Notes</h1>
+      <h1 className='text-4xl text-center text-white'>Your Notes</h1>
+      <div  className='text-white'>
+ <Box notes={notes}></Box>
+</div>
       </>   
 }
 
-<div  className='text-white'>
-  {
-    Fetch&&notes.map((note:any)=>(
-      <>
-       <h1 className='text-2xl text-center'>{note.category}</h1>
-       <div className='grid items-center justify-center gap-16 p-4 mt-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 place-items-center place-content-center'>
-      {note.Notes.map((note:any,index:number)=>(
-        <>
-        <Box Title={note.title} description={LimitText(note.content)}  Color={Color(index)}/>
-        </>
-      ))
-    }
-      </div>
-      </>
-  
-    )
-    )
-  }
-</div>
+
 
 
     </>

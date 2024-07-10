@@ -29,6 +29,7 @@ function App() {
     })();
   },[])
   return (
+    <>
 <Router >
       <Routes>
         <Route path="/" element={<HomePage></HomePage>}/>
@@ -36,6 +37,7 @@ function App() {
         <Route  path="/signup" element={<Registration />}  />
       </Routes>
     </Router>
+    </>
   )
 }
 
