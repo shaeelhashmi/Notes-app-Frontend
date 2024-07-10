@@ -14,20 +14,20 @@ function Note({ note }: { note: any }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`text-white w-[90vw] bg-[#002688] mx-auto rounded-lg my-8 
-    } p-3 ${ expanded ? ' duration-500 ' : ' duration-1000 '
-        }} transition-all`}
-    style={{ height: expanded ? `${63 + (note.Notes.length * 63)}px` : '56.66px' }}>
-      <div className="grid grid-cols-[20%,80%] h-[60px]">
-        <div className="ms-6">{note.category}</div>
-        <div
-          className="mr-5 cursor-pointer justify-self-end"
+    <div className={`text-white w-[100vw] bg-[#002688] 
+    } p-3 ${ expanded ? ' duration-700 ' : ' duration-1000 '
+        }} transition-all border-t-2 border-solid border-[#2a2aff71]`}
+    style={{ height: expanded ? `${63 + (note.Notes.length * 63)}px` : '63px' }}>
+      <div className=" h-[60px] flex justify-center">
+        <div className="flex-grow text-2xl text-center ">{note.category} <div
+          className={`mr-5 cursor-pointer justify-self-end ${expanded? 'rotate-180' : 'rotate-0'} h-fit duration-1000 transition-all float-right`}
           onClick={() => {
             setExpanded(!expanded);
           }}
         >
           <Expand></Expand>
-        </div>
+        </div></div>
+        
       </div>
       <div
         className={`mr-2 ${

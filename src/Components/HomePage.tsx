@@ -207,7 +207,7 @@ export default function HomePage() {
                 
       )}
       <h1 className='text-4xl text-center text-white'>Your Notes</h1>
-      <div  className='text-white'>
+      <div  className='text-white my-7'>
  <Box notes={notes}></Box>
 </div>
       </>   
