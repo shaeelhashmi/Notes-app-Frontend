@@ -14,7 +14,7 @@ function Note({ note }: { note: any }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`text-white w-[100vw] bg-[#002688] 
+    <div className={`text-black w-[100vw] bg-[rgb(51_108_255)] 
     } p-3 ${ expanded ? ' duration-700 ' : ' duration-1000 '
         }} transition-all border-t-2 border-solid border-[#2a2aff71]`}
     style={{ height: expanded ? `${63 + (note.Notes.length * 63)}px` : '63px' }}>

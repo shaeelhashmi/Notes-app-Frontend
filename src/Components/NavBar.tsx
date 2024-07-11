@@ -1,34 +1,26 @@
-import { useState } from "react";
-import Bell from "./SVG/Bell";
-import Expand from "./SVG/Expand.tsx";
+import { useNavigate } from "react-router-dom";
 interface Props {
   username: String;
 }
 export default function NavBar(props:Props) {
-  const [showMenu, setShowMenu] = useState(false)
+  const navigate=useNavigate();
   return ( 
-    <div className='bg-[#171616] h-[50px] p-3 grid grid-flow-col text-white grid-cols-3 text-[0.8rem] md:text-sm'>
-      <div className="w-fit" >
-        <div className=" hover:cursor-pointer" onClick={()=>{setShowMenu(!showMenu)}}>{props.username}<Expand></Expand></div> 
-    
-
-          <div className={`bg-[#171616] mt-2 border-2 border-t-0 rounded-md rounded-t-none border-black relative right-4 ${showMenu ? "scale-y-100 " : "scale-y-0 "} transition-all duration-500 origin-top ms-4 items-center flex justify-center flex-col`}>
-          <div className={`mt-2   mb-2 w-full flex justify-center`}>
+    <div className='bg-[rgb(20_0_255)]  p-3 grid grid-flow-col text-white grid-cols-3 text-sm md:text-lg place-content-center  justify-items-center items-center gap-5'>
+      <div className="flex flex-col items-center w-full">
+            <div className="w-full text-center "> {props.username}</div>  
+   </div>
+         
+          <div className={`w-full flex justify-center  p-0`}>
+          <a  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer">Home</a>
+            <a  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer">Settings</a>
+          </div>
+          <div className={` flex justify-end w-full`}>
             <button onClick={()=>{ fetch('/logout',{
       method:'POST',
     }).then(()=>{
-      window.location.href='/login'
-    })}} className="w-full hover:border-white border-x-0 border-[#171616] transition-all duration-500 border-t-0 border-2">Logout</button>
+     navigate('/login');
+    })}} className="w-[100px] transition-all duration-500 border-x-0  p-3 border-b-2 border-solid hover:border-[#2c2cff] border-[rgb(20_0_255)]  bg-[rgb(30,20,137)] rounded-lg hover:bg-[rgb(48,40,135)] ">Logout</button>
           </div>
-          <div className={`mt-2 border-2 hover:border-white border-x-0 border-[#171616] transition-all duration-500 border-t-0 mb-2 w-full flex justify-center`}>
-            <button  className="w-full hover:border-white border-x-0 border-[#171616] transition-all duration-500 border-t-0 border-2">Settings</button>
-          </div>
-        </div>
-
-   </div>
-      
-      <div className="mx-auto text-center hover:cursor-pointer ">Sort<Expand></Expand></div>
-      <div className="flex justify-end me-3 hover:cursor-pointer"><Bell></Bell></div>
     </div>
   )
 }

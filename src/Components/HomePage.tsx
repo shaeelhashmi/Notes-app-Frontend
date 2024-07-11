@@ -117,7 +117,7 @@ export default function HomePage() {
 
     <>
     {
-      loader&&selector2.value? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
+      loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
       :
     <>
       <NavBar username={username} />
@@ -206,7 +206,7 @@ export default function HomePage() {
         </div>
                 
       )}
-      <h1 className='text-4xl text-center text-white'>Your Notes</h1>
+      <h1 className='text-4xl text-center text-black'>Your Notes</h1>
       <div  className='text-white my-7'>
  <Box notes={notes}></Box>
 </div>
