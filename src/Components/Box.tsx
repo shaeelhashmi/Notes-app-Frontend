@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import Expand from './SVG/Expand';
+
+const convertDate = (date: Date) => {
+  return date.toISOString().split('T')[0]
+}
+
 export default function Box(props: any) {
   let length = props.notes.length;
   return (
@@ -16,22 +21,22 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
 
   return (
     <div className={`text-black w-[100vw] bg-[rgb(51_108_255)] 
-    } p-3 ${ expanded ? ' duration-700 ' : ' duration-1000 '
+    }  ${ expanded ? ' duration-700 ' : ' duration-1000 '
         }} transition-all ${isFirst ? 'border-t-4' : 'border-y-4'} ${lastEle ? 'border-b-4' : ''} border-solid border-[#2a2aff71] `}
     style={{ height: expanded ? `${67 + (note.Notes.length * 67)}px` : '67px' }}>
-      <div className=" h-[60px] flex justify-center">
-        <div className="flex-grow text-2xl text-center ">{note.category} <div
+      <div className=" h-[60px] grid grid-cols-3 items-center">
+        <div className="col-start-2 col-end-3 text-2xl text-center">{note.category} </div>  
+        <div
           className={`mr-5 cursor-pointer justify-self-end ${expanded? 'rotate-180' : 'rotate-0'} h-fit duration-1000 transition-all float-right`}
           onClick={() => {
             setExpanded(!expanded);
           }}
         >
           <Expand></Expand>
-        </div></div>
-        
+        </div>
       </div>
       <div
-        className={`mr-2 ${
+        className={` ${
           expanded ? 'scale-y-100 duration-1000 ' : 'scale-y-0 duration-500 '
         } origin-top transition-all w-full border-t-0  `}
       >
@@ -39,10 +44,17 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
           return (
             <div
               key={subIndex}
-              className={`grid grid-cols-2 p-3 border-t-2 border-solid border-[#2a2aff71]  items-center place-content-center h-[67px]`}
+              className={`grid grid-cols-1 p-[10px] border-t-4 border-solid border-[#2a2aff71]  items-center place-content-center h-[60px]`}
             >
-              <a>{subNote.title}</a>
-              <a className="p-2 justify-self-end">fafafaf</a>
+              <div className='grid grid-cols-[1fr_1fr_1fr] p-2'>
+                <div>
+              <p>Date submitted:<i className='font-light'>{convertDate(new Date(subNote.SubmissionDate))}</i></p>
+              </div><div>
+              <p className='text-xl text-center'>{subNote.title}</p>
+              </div><div>
+              <a className="float-right">Viewnote</a>
+              </div>
+              </div>
             </div>
           );
         })}

@@ -12,10 +12,9 @@ export default function HomePage() {
   const navigate=useNavigate();
   const today = new Date();
   const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1); // Add 1 day
-  const minDate = tomorrow.toISOString().split('T')[0]; // Get tomorrow's date in YYYY-MM-DD format
+  tomorrow.setDate(today.getDate() + 1); 
   const [showPopup, setShowPopup] = useState(false);
-  const [username, setUsername] = useState(''); // State to store username
+  const [username, setUsername] = useState(''); 
   const [loader, setLoader] = useState(true); // State to store loader
   const [error, setError] = useState(''); // State to store error messages
   const [notes,setNotes]=useState<any>([]); // State to store notes
@@ -38,6 +37,7 @@ export default function HomePage() {
   const checkLogin = async () => {
     try {
         Notes=await getDateTime();
+        console.log(Notes);
         setNotes(Notes); // Update the notes state with the fetched data
       
     } catch {
@@ -57,13 +57,12 @@ export default function HomePage() {
     const category = (form.elements.namedItem('Category') as HTMLInputElement).value;
     const title = (form.elements.namedItem('Title') as HTMLInputElement).value;
     const description = (form.elements.namedItem('description') as HTMLInputElement).value;
-    const CompletionDate = (form.elements.namedItem('CompletionDate') as HTMLInputElement).value;
     let data:data;
     if(title.trim().length===0 || category.trim().length===0 || description.trim().length===0){
       setError('Please fill all the fields');
       return;
     }
-      data={category:category.trim(),title:title.trim(),description:description.trim(),CompletionDate:CompletionDate}
+      data={category:category.trim(),title:title.trim(),description:description.trim()}
     try{
     const res=await fetch('/addnote', {
       method: 'POST',
@@ -73,9 +72,12 @@ export default function HomePage() {
       body: JSON.stringify(data),
     })
     const response = await res.json();
+    if(res.status===500){
+      setError('Internal server Error')
+      return;
+    }
     setError(response.message);
     location.reload();
-
   }
   catch(error){
     setError('Internal server Error')
@@ -100,8 +102,7 @@ export default function HomePage() {
     setUsername(selector1.name);
   }
   },[selector1,selector2])
-  useEffect(() => {
-   
+  useEffect(() => { 
     (async () => {
       await checkLogin();
       
@@ -122,7 +123,7 @@ export default function HomePage() {
     <>
       <NavBar username={username} />
       <div
-        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(44_66_255)] w-[300px] rounded-[10px] h-[50px] p-6    hover:bg-[rgb(41,51,146)] transition-all duration-500 hover:cursor-pointer"
+        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(44_66_255)] w-[300px] rounded-[10px] h-[50px] p-6       hover:bg-[rgb(44_100_255)] transition-all duration-500 hover:cursor-pointer"
         onClick={() => {
           setShowPopup(!showPopup);
           setError('');
@@ -133,7 +134,7 @@ export default function HomePage() {
       </div>
       {showPopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
-          <div className="p-5 w-96 bg-[#0E0E0E] rounded-xl">
+          <div className="p-5 w-96 bg-[rgb(44_54_201)] rounded-xl">
             <div className='h-3 text-center text-red-700'>{error}</div>
             <form className="text-white"  onSubmit={CreateNote}>
               <InputTags
@@ -154,11 +155,11 @@ export default function HomePage() {
               />
               <div className="flex flex-col">
                 <div className="flex items-center mt-8">
-                  <label htmlFor="description" className="w-1/3 text-lg">
+                  <label htmlFor="description" className="w-1/3 text-lg text-white">
                     Description:
                   </label>
                   <textarea
-                    className="h-26 w-[63%] p-3 text-sm bg-[#171617] border-l-0 border-r-0 border-t-0 border-b"
+                    className="h-26 w-[63%] p-3 text-sm bg-[rgb(134_130_255)] border-l-0 border-r-0 border-t-0 border-b text-black"
                     placeholder="Description"
                     name="description"
                     required
@@ -166,25 +167,11 @@ export default function HomePage() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col">
-                <div className="flex items-center mt-8">
-                  <label htmlFor="date" className="w-1/3 text-lg">
-                    Date:
-                  </label>
-                  <input
-                    type="date"
-                    name="CompletionDate"
-                    min={minDate}
-                    className="h-26 w-[63%] p-3 text-sm bg-[#171617] border-l-0 border-r-0 border-t-0 border-b"
-                    required
-                  />
-                </div>
-              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <button
                     type="submit"
-                    className="mt-8 bg-[#161616] w-[150px] h-[50px] border-2 rounded-lg border-black hover:bg-[#2d2a2a] transition-all duration-500"
+                    className="mt-8 bg-[#1c07ff] w-[150px] h-[50px]  rounded-lg  hover:bg-[#301eff] transition-all duration-500"
                   >
                     Submit
                   </button>
@@ -192,7 +179,7 @@ export default function HomePage() {
                 <div>
                   <button
                     type="button"
-                    className="mt-8 bg-[#161616] w-[150px] h-[50px] border-2 rounded-lg border-black hover:bg-[#2d2a2a] transition-all duration-500"
+                    className="mt-8 bg-[#c30000] w-[150px] h-[50px]  rounded-lg  hover:bg-[#ff1f1f] transition-all duration-500"
                     onClick={() => {
                       setShowPopup(!showPopup);
                     }}
