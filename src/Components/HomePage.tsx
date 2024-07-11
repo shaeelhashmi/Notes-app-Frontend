@@ -122,7 +122,7 @@ export default function HomePage() {
     <>
       <NavBar username={username} />
       <div
-        className="flex items-center mx-auto my-12 text-center text-white bg-[#2C2A2A] w-[300px] rounded-[20px] h-[50px] p-6 border-solid border-4 border-black hover:bg-[#434343] transition-all duration-500 hover:cursor-pointer"
+        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(44_66_255)] w-[300px] rounded-[10px] h-[50px] p-6    hover:bg-[rgb(41,51,146)] transition-all duration-500 hover:cursor-pointer"
         onClick={() => {
           setShowPopup(!showPopup);
           setError('');

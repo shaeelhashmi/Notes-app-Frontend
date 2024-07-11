@@ -5,3 +5,14 @@ body
 {
     background-color: #5366ff;
 }
+.animation{
+    animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+    0% {
+        transform: scaleY(0%);
+    }
+    100% {
+        transform: scaleY(100%);
+    }
+}
