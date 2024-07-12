@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import VerticalElips from './SVG/VerticalElips'
 import axios from 'axios'
 import Loader from './Loader'
+import { useNavigate } from 'react-router-dom'
 interface Data{
   title:string,
   content:string,
@@ -11,6 +12,7 @@ interface Data{
   _id:string
 }
 export default function ShowNotes() {
+  const nav=useNavigate()
   const convertDate = (date: Date) => {
     return date.toISOString().split('T')[0]
   }
@@ -53,7 +55,16 @@ export default function ShowNotes() {
             <div className={`col-span-3 col-start-3 col-end-4 ${showMenu?"scale-y-0":"scale-y-100"} duration-1000 transition-all origin-top h-5 
  rounded-full me-4 w-[200px] justify-self-end`}>
             <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white'>Edit note</button></div>
-            <div className={`flex justify-center    me-4  duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 rounded-b-lg `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white'>Delete note</button></div>
+            <div className={`flex justify-center    me-4  duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 rounded-b-lg `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white' onClick={async()=>{
+             try
+             {
+             await axios.delete('/DeleteNote',{ data: { id: data._id } })
+             nav("/")
+             }catch(err){
+              console.log(err)
+             }
+              
+            }}>Delete note</button></div>
             </div>
             </div>   
         
