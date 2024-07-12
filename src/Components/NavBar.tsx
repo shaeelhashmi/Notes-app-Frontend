@@ -19,7 +19,7 @@ export default function NavBar(props:Props) {
       method:'POST',
     }).then(()=>{
      navigate('/login');
-    })}} className="w-[100px] transition-all duration-500 border-x-0  p-3 border-b-2 border-solid hover:border-[#2c2cff] border-[rgb(20_0_255)]  bg-[rgb(30,20,137)] rounded-lg hover:bg-[rgb(48,40,135)] ">Logout</button>
+    })}} className="w-[100px] transition-all duration-500 border-x-0  p-3 border-b-2 border-solid hover:border-[#2c2cff] border-[rgb(20_0_255)]  bg-[rgb(48,31,234)] rounded-lg hover:bg-[rgb(95,81,255)] ">Logout</button>
           </div>
     </div>
   )
