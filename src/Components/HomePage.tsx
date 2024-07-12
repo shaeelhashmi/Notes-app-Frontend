@@ -104,8 +104,7 @@ export default function HomePage() {
   },[selector1,selector2])
   useEffect(() => { 
     (async () => {
-      await checkLogin();
-      
+      await checkLogin(); 
       setLoader(false);
     })();
     checkLogin();
@@ -198,11 +197,6 @@ export default function HomePage() {
  <Box notes={notes}></Box>
 </div>
       </>   
-}
-
-
-
-
-    </>
+} </>
   );
 }

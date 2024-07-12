@@ -5,7 +5,7 @@ interface Props {
 export default function NavBar(props:Props) {
   const navigate=useNavigate();
   return ( 
-    <div className='bg-[rgb(20_0_255)]  p-3 grid grid-flow-col text-white grid-cols-3 text-sm md:text-lg place-content-center  justify-items-center items-center gap-5'>
+    <div className='bg-[rgb(20_0_255)]  p-3 grid grid-flow-col text-white grid-cols-3 text-sm md:text-lg place-content-center  justify-items-center items-center gap-5 fixed top-0 w-full'>
       <div className="flex flex-col items-center w-full">
             <div className="w-full text-center "> {props.username}</div>  
    </div>
