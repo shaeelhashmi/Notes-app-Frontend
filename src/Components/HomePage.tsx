@@ -4,17 +4,13 @@ import NavBar from './NavBar';
 import Plus from './SVG/Plus';
 import Loader from './Loader.tsx'
 import Box from './Box.tsx';
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
-  const selector1=useSelector((state:any)=>state.getUserName)
-  const selector2=useSelector((state:any)=>state.Check)
   const navigate=useNavigate();
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1); 
   const [showPopup, setShowPopup] = useState(false);
-  const [username, setUsername] = useState(''); 
   const [loader, setLoader] = useState(true); // State to store loader
   const [error, setError] = useState(''); // State to store error messages
   const [notes,setNotes]=useState<any>([]); // State to store notes
@@ -37,7 +33,6 @@ export default function HomePage() {
   const checkLogin = async () => {
     try {
         Notes=await getDateTime();
-        console.log(Notes);
         setNotes(Notes); // Update the notes state with the fetched data
       
     } catch {
@@ -97,11 +92,7 @@ export default function HomePage() {
     }
     
   }
-  useEffect(() => {
-   if(selector2.value){
-    setUsername(selector1.name);
-  }
-  },[selector1,selector2])
+ 
   useEffect(() => { 
     (async () => {
       await checkLogin(); 
@@ -110,19 +101,18 @@ export default function HomePage() {
     checkLogin();
     setError('');
     setShowPopup(false);
-    setUsername('');
     setLoader(true);
   }, []);
-  return (
 
+  return (
     <>
     {
       loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
       :
     <>
-      <NavBar username={username} />
-      <div
-        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(44_66_255)] w-[300px] rounded-[10px] h-[50px] p-6       hover:bg-[rgb(44_100_255)] transition-all duration-500 hover:cursor-pointer"
+      <NavBar/>
+      <button
+        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(0_24_227)] w-[300px] rounded-[10px] h-[50px] p-6       hover:bg-[rgb(0_24_240)] transition-all duration-500 hover:cursor-pointer mt-32"
         onClick={() => {
           setShowPopup(!showPopup);
           setError('');
@@ -130,7 +120,7 @@ export default function HomePage() {
       >
         <Plus />
         Add new Note
-      </div>
+      </button>
       {showPopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
           <div className="p-5 w-96 bg-[rgb(44_54_201)] rounded-xl">

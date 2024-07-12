@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Expand from './SVG/Expand';
-
+import { Link } from 'react-router-dom';
 const convertDate = (date: Date) => {
   return date.toISOString().split('T')[0]
 }
@@ -20,7 +20,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`text-black w-[100vw] bg-[rgb(51_108_255)] 
+    <div className={`text-black  bg-[rgb(51_108_255)] 
     }  ${ expanded ? ' duration-700 ' : ' duration-1000 '
         }} transition-all ${isFirst ? 'border-t-4' : 'border-y-4'} ${lastEle ? 'border-b-4' : ''} border-solid border-[#2a2aff71] `}
     style={{ height: expanded ? `${67 + (note.Notes.length * 67)}px` : '67px' }}>
@@ -52,7 +52,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
               </div><div>
               <p className='text-xl text-center'>{subNote.title}</p>
               </div><div>
-              <a className="float-right">Viewnote</a>
+              <Link   className="float-right" to={`/notes/${subNote._id}`}>Viewnote</Link>
               </div>
               </div>
             </div>
