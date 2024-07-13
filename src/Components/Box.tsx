@@ -48,7 +48,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
             >
               <div className='grid grid-cols-[1fr_1fr_1fr] p-2'>
                 <div>
-              <p>Date submitted:<i className='font-light'>{convertDate(new Date(subNote.SubmissionDate))}</i></p>
+              <p>Last updated:<i className='font-light'>{convertDate(new Date(subNote.SubmissionDate))}</i></p>
               </div><div>
               <p className='text-xl text-center'>{subNote.title}</p>
               </div><div>

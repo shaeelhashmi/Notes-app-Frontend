@@ -123,8 +123,8 @@ export default function HomePage() {
       </button>
       {showPopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
-          <div className="p-5 w-96 bg-[rgb(44_54_201)] rounded-xl">
-            <div className='h-3 text-center text-red-700'>{error}</div>
+          <div className="p-5 w-96 bg-[rgb(0,17,255)]  rounded-xl">
+          <div className='h-3 text-2xl text-center text-white'>Create Note</div>
             <form className="text-white"  onSubmit={CreateNote}>
               <InputTags
                 name="Category"
@@ -148,7 +148,7 @@ export default function HomePage() {
                     Description:
                   </label>
                   <textarea
-                    className="h-26 w-[63%] p-3 text-sm bg-[rgb(134_130_255)] border-l-0 border-r-0 border-t-0 border-b text-black"
+                    className="h-26 w-[63%] p-3 text-sm bg-[rgb(134_130_255)] border-l-0 border-r-0 border-t-0 border-b text-black placeholder-black resize-none min-h-20"
                     placeholder="Description"
                     name="description"
                     required
@@ -156,11 +156,12 @@ export default function HomePage() {
                   />
                 </div>
               </div>
+              <div className='h-5 mt-2 text-sm text-red-400'>{error}</div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <button
+                <button
                     type="submit"
-                    className="mt-8 bg-[#1c07ff] w-[150px] h-[50px]  rounded-lg  hover:bg-[#301eff] transition-all duration-500"
+                    className="mt-8 bg-[#0a0077] w-[150px] h-[50px]  rounded-lg  hover:bg-[#1100d0] transition-all duration-500"
                   >
                     Submit
                   </button>
