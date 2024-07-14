@@ -7,8 +7,25 @@ body
     background:linear-gradient(90deg,#0019d4 25%, #5366ff 50%, #0019d4 100%);
     
 }
+.animate2{
+    animation: slide2 1s linear ;
+}
 .animate{
-    animation: slide 5s linear infinite;
+    animation: slide 5s linear ;
+}
+@keyframes slide2 {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 @keyframes slide {
     0% {
@@ -34,7 +51,4 @@ body
   
   .translate-x-full {
     transform: translateX(100%);
-  }
-  .color{
-    background:linear-gradient(90deg,#0019d4 0%, #5366ff 50%, #0019d4 100%);
   }

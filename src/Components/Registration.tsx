@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom';
 import InputTags from './InputTags.tsx';
 import React,{ FormEvent,useState,useEffect } from 'react'
+import Google from './SVG/Google.tsx';
+import Side from './Side.tsx';
 export default function Registration() {
   const [error,setError]=useState('')
   const IsEmpty=(username:String,password:String):boolean=>{
@@ -56,9 +58,14 @@ export default function Registration() {
    }
   return (
     <>
-    <div className='flex items-center justify-center min-h-screen'>
-    <div className='w-[400px] h-[360px] p-3  rounded-3xl bg-opacity-100 text-white border-[#0C0B0C] border-solid border-4'>
-      <h1 className='text-3xl text-center '>Sign Up</h1> 
+       <div className='grid min-h-screen grid-cols-1 lg:grid-cols-2 color place-content-center ' >
+       <div className=' text-white  p-14 w-[550px]   h-full mx-auto '>
+      <h1 className='font-serif text-3xl text-center lg:hidden'>Welcome to Notes App 
+        <br></br><span className='text-base'>An easy way to manage your notes Signup or login to continue</span></h1>
+       <div className='flex'>
+      <a href="/auth/google/callback" className='mx-auto mt-6  bg-[#0B032D] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#11044d] transition-all duration-500 text-white justify-self-center'><Google></Google><span className='ms-5'>Login with Google</span></a>
+      </div>
+      <h1 className='font-serif text-3xl text-center mt-11'>Sign Up</h1> 
       <form action="/register" method="post" onSubmit={Submit}>
         <div className='flex flex-col'> 
           <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange}></InputTags>
@@ -66,12 +73,13 @@ export default function Registration() {
         </div> 
         <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
         <div className="flex">
-        <button type="submit" className='w-[300px] h-[50px] bg-[#1e1c1e] mt-6 mx-auto  hover:bg-[#393639] transition-all duration-200 rounded-md'>SignUp</button>
-        <a href="/auth/google/callback" className='mx-auto mt-6 ms-2 bg-[#1e1c1e] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#393639] transition-all duration-200'>Login with Google</a>  
+        <button type="submit" className='w-[300px] h-[50px] bg-[#0B032D] mt-6 mx-auto  transition-all duration-500 rounded-md text-white hover:bg-[#11044d]'>SignUp</button>
         </div>    
       </form>
       <Link to="/login" className='text-[0.6rem] mt-7'>Already have an account? Login</Link>
-    </div>
+
+  </div>
+  <Side></Side>
   </div>
     </>
   );
