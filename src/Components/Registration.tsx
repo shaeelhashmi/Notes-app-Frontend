@@ -52,9 +52,25 @@ export default function Registration() {
   useEffect(() => {
     setError('');
   },[])
+  const handlePass=(e:React.FormEvent<HTMLInputElement>)=>{
+    if(e.currentTarget.value.length>30){
+      console.log(e.currentTarget.value.length)
+      e.currentTarget.value = e.currentTarget.value.slice(0,30);
+      setError('Password cannot be more than 30 characters')
+    }else{
+      setError('')
+    }
+  }
   const handleChange = (e:React.FormEvent<HTMLInputElement>) => {
     e.currentTarget.value = e.currentTarget.value.toLowerCase();
     e.currentTarget.value = e.currentTarget.value.split(" ").join("");
+    if(e.currentTarget.value.length>20){
+      console.log(e.currentTarget.value.length)
+      e.currentTarget.value = e.currentTarget.value.slice(0,20);
+      setError('Username cannot be more than 20 characters')
+    }else{
+      setError('')
+    }
    }
   return (
     <>
@@ -69,7 +85,7 @@ export default function Registration() {
       <form action="/register" method="post" onSubmit={Submit}>
         <div className='flex flex-col'> 
           <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange}></InputTags>
-          <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"}></InputTags>
+          <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"} function={handlePass}></InputTags>
         </div> 
         <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
         <div className="flex">

@@ -1,18 +1,99 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import InputTags from "./InputTags"
 import NavBar from "./NavBar"
 import axios from "axios"
+import Loader from "./Loader"
 export default function Settings() {
     const [error1,setError1]=useState('')
     const [error2,setError2]=useState('')
+    const [popup,setPopup]=useState(false)
+    const [popup2,setPopup2]=useState(false)
+    const [Error3,setError3]=useState('')
+    const [googleUser,setGoogleUser]=useState(false)
+    const [loader,setLoader]=useState(true)
+    const check=async()=>{
+        const res=await axios.post("/checkaccount")
+        setGoogleUser(res.data.message)
+    }
+        const handlePass=(e:React.FormEvent<HTMLInputElement>)=>{
+        if(e.currentTarget.value.length>30){
+          console.log(e.currentTarget.value.length)
+          e.currentTarget.value = e.currentTarget.value.slice(0,30);
+          setError1('Password cannot be more than 30 characters')
+        }else{
+          setError1('')
+        }
+      }
+      const handleChange = (e:React.FormEvent<HTMLInputElement>) => {
+        e.currentTarget.value = e.currentTarget.value.toLowerCase();
+        e.currentTarget.value = e.currentTarget.value.split(" ").join("");
+        if(e.currentTarget.value.length>20){
+          console.log(e.currentTarget.value.length)
+          e.currentTarget.value = e.currentTarget.value.slice(0,20);
+          setError2('Username cannot be more than 20 characters')
+        }else{
+          setError2('')
+        }
+       }
+       useEffect(()=>{
+      
+        (async () => {
+            await check(); 
+            setLoader(false);
+          })();
+         setLoader(true)
+         setError3(" ")
+       },[])
   return (
     <>
+    { loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>:
+    <div>
+        {popup2&&<div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 ">
+            <form>
+                <div className="w-[350px] h-[250px] bg-blue-400 p-2 rounded-lg">
+                    <p className="my-3 text-sm text-center">Enter your password to delete your account</p>
+            {googleUser?<InputTags name="email" label="Email:"
+                type="email" placeholder="email" function={handlePass}></InputTags>:<InputTags name="password" label="Password:"
+                type="password" placeholder="Password" function={handlePass}></InputTags>}
+                  <div className="h-5 my-2 text-center text-red-700">{Error3}</div>
+                  <div className="flex items-center justify-center">
+                    <button className="m-3 w-[200px] h-[40px] bg-[#FF010A] rounded-md hover:bg-[#fc232b] duration-500 transition-all">Confirm deletion</button>
+                    <button className="m-3 w-[200px] h-[40px] bg-[#01ff5ad1] hover:bg-[#01ff5a] rounded-md duration-500 transition-all"
+                    onClick={()=>{
+                        setPopup2(false)
+                    }}>Cancel</button>
+                  </div>
+                </div>
+              
+            </form>
+            </div>}
+    {
+    popup&&<div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 ">
+        <div className="w-[350px] h-[200px] bg-white p-4 rounded-lg">
+            <p className="text-lg text-[#cc0000] my-4">Are you sure you want to delete your account?<br></br><span className="text-sm">Warning this action is irreversible</span></p>
+            <div className="grid grid-cols-2 gap-3 my-3">
+                <div className="flex justify-center">
+                <button className="bg-[#FF010A] w-[100px] h-[30px] hover:bg-[#f4252c] duration-500 rounded-md"onClick={()=>{
+                   setPopup(false)
+                     setPopup2(true)
+                }}>Yes</button>
+                </div>
+                <div className="flex justify-center">
+                <button className="bg-[#0BBC46] w-[100px] h-[30px] hover:bg-[#2eb55b] rounded-md duration-500" onClick={()=>{
+                    setPopup(false)
+                }}>Cancel</button>
+                </div>
+            </div>
+        
+
+        </div>
+        </div>}
     <NavBar></NavBar>
     <div className="grid grid-flow-row gap-4 mt-4">
             <h1 className="mt-32 font-sans text-3xl font-bold text-center text-white">Settings</h1>
         <div className="w-[500px] text-white mx-auto my-12">
-            <h1 className="text-xl font-bold text-center">Change password</h1>
-            <form onSubmit={async (e:FormEvent<HTMLFormElement>)=>{
+        {!googleUser&&<> <h1 className="text-xl font-bold text-center">Change password</h1>
+           <form onSubmit={async (e:FormEvent<HTMLFormElement>)=>{
                 try{
           e.preventDefault();
           const FormData=e.currentTarget;
@@ -34,11 +115,11 @@ export default function Settings() {
         }
             }}>
                 <InputTags name="password" label="New password:"
-                type="password" placeholder="Password"></InputTags>
+                type="password" placeholder="Password" function={handlePass}></InputTags>
                 <InputTags name="password2" label="Confirm Password:"
-                type="password" placeholder="Password"></InputTags>
+                type="password" placeholder="Password" function={handlePass}></InputTags>
                 <InputTags name="currPassword" label="Current password:"
-                type="password" placeholder="Password"></InputTags>
+                type="password" placeholder="Password" function={handlePass}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error1}</div>
                 <div className="flex justify-center my-5">
                 
@@ -47,6 +128,8 @@ export default function Settings() {
                  </div>
                
             </form>
+            </> 
+}
         </div>
                  <div className="w-[500px] text-white mx-auto my-12">
             <h1 className="text-xl font-bold text-center">Change username</h1>
@@ -67,10 +150,7 @@ export default function Settings() {
             }
             }}>
                 <InputTags name="userName" label="Username:"
-                type="text" placeholder="username" function={   (e:React.FormEvent<HTMLInputElement>) => {
-                    e.currentTarget.value = e.currentTarget.value.toLowerCase();
-                    e.currentTarget.value = e.currentTarget.value.split(" ").join("");
-                   }}></InputTags>
+                type="text" placeholder="username" function={handleChange}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error2}</div>
                 <div className="flex justify-center my-5">
                 <button type="submit" className="w-[200px] h-[40px] mt-5 border-[#4C004B] border-4 border-solid 
@@ -78,7 +158,16 @@ export default function Settings() {
                  </div>
             </form>
         </div>
+        <div className="flex flex-col justify-center w-full text-center border-t-4 border-red-800 border-solid">
+            <h1 className="my-10 text-2xl text-center text-[#C60101]">Delete your account</h1>
+            <div>
+            <button className="w-[200px] h-[60px] bg-[#FF1201] my-11 text-white hover:bg-[#ff1c0c] rounded-lg duration-500 transition-all" onClick={()=>{setPopup(true)}}>Delete your account</button>
+            </div>
+        </div>
     </div>
+    </div>
+}
     </>
+    
   )
 }
