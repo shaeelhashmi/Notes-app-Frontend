@@ -49,12 +49,42 @@ export default function Settings() {
     { loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>:
     <div>
         {popup2&&<div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 ">
-            <form>
+            <form onSubmit={async(e:FormEvent<HTMLFormElement>)=>{
+                try{
+                e.preventDefault();
+                const FormData=e.currentTarget;
+             
+                
+                if(googleUser){
+                    const email=FormData.email.value;
+                    if(email.length===0){
+                        setError3('Email cannot be empty')
+                        return;
+                    }
+                const res=await axios.delete("/deleteaccount",{data:{email:email}})
+                setError3(res.data.message)
+                location.reload();
+                }else{
+                    
+                const password=FormData.password.value;
+                if(password.length===0){
+                    setError3('Email cannot be empty')
+                    return;
+                }
+                    const res=await axios.delete("/deleteaccount",{data:{password:password}})
+                    setError3(res.data.message)
+                    location.reload();
+                }
+            }catch(err:any){
+            
+                setError3(err.response.data.message)
+            }
+            }}>
                 <div className="w-[350px] h-[250px] bg-blue-400 p-2 rounded-lg">
-                    <p className="my-3 text-sm text-center">Enter your password to delete your account</p>
-            {googleUser?<InputTags name="email" label="Email:"
-                type="email" placeholder="email" function={handlePass}></InputTags>:<InputTags name="password" label="Password:"
-                type="password" placeholder="Password" function={handlePass}></InputTags>}
+                    
+            {googleUser?<><p className="my-3 text-sm text-center">Enter your Email address to delete your account</p><InputTags name="email" label="Email:"
+                type="email" placeholder="email" function={handlePass}></InputTags></>:<><p className="my-3 text-sm text-center">Enter your password to delete your account</p><InputTags name="password" label="Password:"
+                type="password" placeholder="Password" function={handlePass}></InputTags></>}
                   <div className="h-5 my-2 text-center text-red-700">{Error3}</div>
                   <div className="flex items-center justify-center">
                     <button className="m-3 w-[200px] h-[40px] bg-[#FF010A] rounded-md hover:bg-[#fc232b] duration-500 transition-all">Confirm deletion</button>
