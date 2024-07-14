@@ -16,7 +16,7 @@ export default function InputTags(props: InputTagsProps) {
         type={props.type} 
         name={props.name} 
         placeholder={props.placeholder} 
-        className='w-[63%] p-3 text-sm bg-[rgb(255,255,255)] border-l-0 border-r-0 border-t-0 border-b text-black placeholder-black'
+        className='w-[63%] p-3 text-sm bg-[rgb(255,255,255)] border-l-0 border-r-0 border-t-0 border-b text-black placeholder-black placeholder-opacity-70'
         onChange={props.function?props.function:(e)=>e.currentTarget.value}
         required={props.required ? true : false}
       />

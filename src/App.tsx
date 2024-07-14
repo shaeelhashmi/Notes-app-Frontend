@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import {valueTaken} from './Slice/ValuesTaken/Check'
 import ShowNotes from './Components/ShowNotes'
+import Settings from './Components/Settings'
 function App() {
   const dispatch = useDispatch()
   const setData=async()=>{
@@ -37,6 +38,7 @@ function App() {
         <Route  path="/login" element={<LoginForm />}  />
         <Route  path="/signup" element={<Registration />}  />
         <Route path="/notes/:id" element={<ShowNotes/>}></Route>
+        <Route path='/settings' element={<Settings/>}></Route>
       </Routes>
     </Router>
     </>

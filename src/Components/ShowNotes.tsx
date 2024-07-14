@@ -70,7 +70,6 @@ export default function ShowNotes() {
        SendData={category:category,title:title,description:description,id:data._id}
         try{
           const res=await axios.patch('/upadteNote',SendData);
-          console.log(res,"fsaf")
           setError(res.data.message)
           nav("/")
           return;
