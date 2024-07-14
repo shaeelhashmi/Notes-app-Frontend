@@ -4,6 +4,8 @@
 body
 {
     background-color: #5366ff;
+    background:linear-gradient(90deg,#0019d4 25%, #5366ff 50%, #0019d4 100%);
+    
 }
 .animate{
     animation: slide 5s linear infinite;
@@ -33,4 +35,6 @@ body
   .translate-x-full {
     transform: translateX(100%);
   }
-  
+  .color{
+    background:linear-gradient(90deg,#0019d4 0%, #5366ff 50%, #0019d4 100%);
+  }

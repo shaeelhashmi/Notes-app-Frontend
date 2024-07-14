@@ -148,7 +148,7 @@ export default function HomePage() {
                     Description:
                   </label>
                   <textarea
-                    className="h-26 w-[63%] p-3 text-sm bg-[rgb(134_130_255)] border-l-0 border-r-0 border-t-0 border-b text-black placeholder-black resize-none min-h-20"
+                    className="h-26 w-[63%] p-3 text-sm bg-white border-l-0 border-r-0 border-t-0 border-b text-black placeholder-black resize-none min-h-20"
                     placeholder="Description"
                     name="description"
                     required
