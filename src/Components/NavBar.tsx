@@ -20,7 +20,7 @@ export default function NavBar() {
    </div>
           <div className={`w-full flex justify-center  p-0`}>
           <Link  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer" to="/">Home</Link>
-            <Link  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer" to="/">Settings</Link>
+            <Link  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer" to="/settings">Settings</Link>
           </div>
           <div className={` flex justify-end w-full`}>
             <button onClick={()=>{ fetch('/logout',{
