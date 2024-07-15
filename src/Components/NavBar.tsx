@@ -14,15 +14,15 @@ export default function NavBar() {
    },[selector1,selector2])
   const navigate=useNavigate();
   return ( 
-    <div className='bg-[rgb(20_0_255)]  p-3 grid grid-flow-col text-white grid-cols-3 text-sm md:text-lg place-content-center  justify-items-center items-center gap-5 fixed top-0 w-full'>
+    <div className='bg-[rgb(20_0_255)]  p-3 grid grid-flow-col text-white sm:grid-cols-3 text-sm md:text-lg place-content-center  justify-items-center items-center gap-5 fixed top-0 w-full grid-cols-2'>
       <div className="flex flex-col items-center w-full">
             <div className="w-full text-center "> {userName}</div>  
    </div>
-          <div className={`w-full flex justify-center  p-0`}>
+          <div className={`w-full flex justify-center  p-0 sm:row-start-1 sm:row-end-2 row-start-2 row-end-3 sm:col-span-1 col-span-2`}>
           <Link  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer" to="/">Home</Link>
             <Link  className="w-full transition-all duration-500  p-3 border-b-2 border-solid hover:border-[#e9e9ff] border-[rgb(20_0_255)] text-center hover:cursor-pointer" to="/settings">Settings</Link>
           </div>
-          <div className={` flex justify-end w-full`}>
+          <div className={` flex sm:justify-end w-full justify-center`}>
             <button onClick={()=>{ fetch('/logout',{
       method:'POST',
     }).then(()=>{

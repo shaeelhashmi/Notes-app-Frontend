@@ -121,8 +121,8 @@ export default function Settings() {
     <NavBar></NavBar>
     <div className="grid grid-flow-row gap-4 mt-4">
             <h1 className="mt-32 font-sans text-3xl font-bold text-center text-white">Settings</h1>
-        <div className="sm:w-[500px] w-[300px] text-white mx-auto my-12">
-        {!googleUser&&<> <h1 className="text-xl font-bold text-center">Change password</h1>
+        {!googleUser&&<div className="sm:w-[500px] w-[300px] text-white mx-auto my-12">
+            <h1 className="text-xl font-bold text-center">Change password</h1>
            <form onSubmit={async (e:FormEvent<HTMLFormElement>)=>{
                 try{
           e.preventDefault();
@@ -158,9 +158,8 @@ export default function Settings() {
                  </div>
                
             </form>
-            </> 
-}
-        </div>
+
+        </div>}
                  <div className="sm:w-[500px] w-[300px] text-white mx-auto my-12">
             <h1 className="text-xl font-bold text-center">Change username</h1>
             <form onSubmit={async(e:FormEvent<HTMLFormElement>)=>{
