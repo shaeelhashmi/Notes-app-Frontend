@@ -17,7 +17,6 @@ export default function Settings() {
     }
         const handlePass=(e:React.FormEvent<HTMLInputElement>)=>{
         if(e.currentTarget.value.length>30){
-          console.log(e.currentTarget.value.length)
           e.currentTarget.value = e.currentTarget.value.slice(0,30);
           setError1('Password cannot be more than 30 characters')
         }else{
@@ -28,7 +27,6 @@ export default function Settings() {
         e.currentTarget.value = e.currentTarget.value.toLowerCase();
         e.currentTarget.value = e.currentTarget.value.split(" ").join("");
         if(e.currentTarget.value.length>20){
-          console.log(e.currentTarget.value.length)
           e.currentTarget.value = e.currentTarget.value.slice(0,20);
           setError2('Username cannot be more than 20 characters')
         }else{

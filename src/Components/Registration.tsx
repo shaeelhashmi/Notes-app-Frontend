@@ -45,7 +45,6 @@ export default function Registration() {
       if(data.message==="User Created"){
         window.location.href='/login'
       }
-      console.log(data)
       setError(data.message)
     })
   }
@@ -54,7 +53,6 @@ export default function Registration() {
   },[])
   const handlePass=(e:React.FormEvent<HTMLInputElement>)=>{
     if(e.currentTarget.value.length>30){
-      console.log(e.currentTarget.value.length)
       e.currentTarget.value = e.currentTarget.value.slice(0,30);
       setError('Password cannot be more than 30 characters')
     }else{
@@ -65,7 +63,6 @@ export default function Registration() {
     e.currentTarget.value = e.currentTarget.value.toLowerCase();
     e.currentTarget.value = e.currentTarget.value.split(" ").join("");
     if(e.currentTarget.value.length>20){
-      console.log(e.currentTarget.value.length)
       e.currentTarget.value = e.currentTarget.value.slice(0,20);
       setError('Username cannot be more than 20 characters')
     }else{

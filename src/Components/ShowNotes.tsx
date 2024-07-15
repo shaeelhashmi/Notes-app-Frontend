@@ -85,7 +85,6 @@ export default function ShowNotes() {
         const fetchData = async () => {
           try {
             const res = await axios.post(`/notes`, { id: id }, { headers: { 'Content-Type': 'application/json' } });
-            console.log(res.status)
             setData(res.data);
           } catch (err:any) {
             setPageError(err.response.status);
@@ -95,9 +94,6 @@ export default function ShowNotes() {
         };
         fetchData();
       }, [id]);
-      useEffect(() => {
-        console.log("Updated data:", data);
-      }, [data]);
       if(PageError===404){
         return <Page404></Page404>
       }

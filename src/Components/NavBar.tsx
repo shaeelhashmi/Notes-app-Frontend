@@ -8,7 +8,6 @@ export default function NavBar() {
   const [userName,setUsername]=useState('');
   useEffect(() => {
     if(selector2.value){
-     console.log(selector1.name)
      setUsername(selector1.name);
    }
    },[selector1,selector2])
