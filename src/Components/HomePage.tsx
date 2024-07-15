@@ -107,7 +107,7 @@ export default function HomePage() {
   return (
     <>
     {
-      loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>
+      loader? <div className='flex items-center justify-center min-h-screen'><Loader/></div>
       :
     <>
       <NavBar/>

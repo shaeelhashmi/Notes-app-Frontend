@@ -7,6 +7,12 @@ body
     background:linear-gradient(90deg,#0019d4 25%, #5366ff 50%, #0019d4 100%);
     
 }
+.shadow{
+
+    box-shadow: 0px 0px 50px 20px rgba(0, 0, 255);
+
+
+}
 .animate2{
     animation: slide2 1s linear ;
 }

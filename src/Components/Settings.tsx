@@ -46,7 +46,7 @@ export default function Settings() {
        },[])
   return (
     <>
-    { loader? <div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>:
+    { loader?  <div className='flex items-center justify-center min-h-screen '><Loader/></div>:
     <div>
         {popup2&&<div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 ">
             <form onSubmit={async(e:FormEvent<HTMLFormElement>)=>{

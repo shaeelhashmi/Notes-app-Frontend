@@ -7,6 +7,7 @@ import Loader from './Loader'
 import { useNavigate } from 'react-router-dom'
 import InputTags from './InputTags'
 import {ChangeEvent,FormEvent,FormEventHandler} from 'react'
+import Page404 from './Page404'
 interface Data{
   title:string,
   content:string,
@@ -23,6 +24,7 @@ export default function ShowNotes() {
     const [data,setData]=useState<Data>({ title: '', content: '', SubmissionDate: new Date(), _id: '' });
     const [show,setShow]=useState(false)
     const [error,setError]=useState('')
+    const [PageError,setPageError]=useState(0)
     const {id}= useParams()
     const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
       const size:number=e.currentTarget.value.length;
@@ -83,9 +85,10 @@ export default function ShowNotes() {
         const fetchData = async () => {
           try {
             const res = await axios.post(`/notes`, { id: id }, { headers: { 'Content-Type': 'application/json' } });
+            console.log(res.status)
             setData(res.data);
-          } catch (err) {
-            console.log(err);
+          } catch (err:any) {
+            setPageError(err.response.status);
           } finally {
             setLoader(false);
           }
@@ -95,9 +98,13 @@ export default function ShowNotes() {
       useEffect(() => {
         console.log("Updated data:", data);
       }, [data]);
+      if(PageError===404){
+        return <Page404></Page404>
+      }
   return (
     <>
-    {loader?<div className='absolute left-[50%] top-[50%] bottom-[50%] right-[50%]'><Loader/></div>:
+
+    {loader? <div className='flex items-center justify-center min-h-screen color'><Loader/></div>:
     <>
     <NavBar>    
     </NavBar>

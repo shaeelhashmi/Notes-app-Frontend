@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import {valueTaken} from './Slice/ValuesTaken/Check'
 import ShowNotes from './Components/ShowNotes'
 import Settings from './Components/Settings'
+import Page404 from './Components/Page404'
 function App() {
   const dispatch = useDispatch()
   const setData=async()=>{
@@ -39,6 +40,7 @@ function App() {
         <Route  path="/signup" element={<Registration />}  />
         <Route path="/notes/:id" element={<ShowNotes/>}></Route>
         <Route path='/settings' element={<Settings/>}></Route>
+        <Route path="*" element={<Page404/>}></Route>
       </Routes>
     </Router>
     </>
