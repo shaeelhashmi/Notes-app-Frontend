@@ -25,7 +25,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
         }} transition-all ${isFirst ? 'border-t-4' : 'border-y-4'} ${lastEle ? 'border-b-4' : ''} border-solid border-[#2a2aff71] `}
     style={{ height: expanded ? `${67 + (note.Notes.length * 67)}px` : '67px' }}>
       <div className=" h-[60px] grid grid-cols-3 items-center">
-        <div className="col-start-2 col-end-3 text-2xl text-center">{note.category} </div>  
+        <div className="col-start-2 col-end-3 text-xl text-center xs:text-2xl">{note.category} </div>  
         <div
           className={`mr-5 cursor-pointer justify-self-end ${expanded? 'rotate-180' : 'rotate-0'} h-fit duration-1000 transition-all float-right`}
           onClick={() => {
@@ -48,11 +48,11 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
             >
               <div className='grid grid-cols-[1fr_1fr_1fr] p-2'>
                 <div>
-              <p>Last updated:<i className='font-light'>{convertDate(new Date(subNote.SubmissionDate))}</i></p>
+              <p className='xs:text-sm sm:text-lg text-[0.7rem]'>Last updated:<i className='font-light xs:text-[0.6rem] sm:text-base text-[0.5rem]'>{convertDate(new Date(subNote.SubmissionDate))}</i></p>
               </div><div>
-              <p className='text-xl text-center'>{subNote.title}</p>
+              <p className='text-sm text-center xs:text-base sm:text-xl '>{subNote.title}</p>
               </div><div>
-              <Link   className="float-right" to={`/notes/${subNote._id}`}>Viewnote</Link>
+              <Link   className="float-right text-[0.7rem] sm:text-base" to={`/notes/${subNote._id}`}>Viewnote</Link>
               </div>
               </div>
             </div>

@@ -17,6 +17,12 @@ export default function HomePage() {
  // State to store fetch
   const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     const size:number=e.currentTarget.value.length;
+    if(size>20){
+      e.currentTarget.value = e.currentTarget.value.slice(0,20);
+      setError('Category or title cannot be more than 20 characters')
+    }else{
+      setError('')
+    }
     let value:string=e.currentTarget.value;
  for(let i=0;i<size-1;i++){
     if(value[i]===" " && value[i+1]===" "){
@@ -28,6 +34,7 @@ export default function HomePage() {
     value=value.slice(1);
     e.currentTarget.value=value;
    }
+  
   }
   let Notes:any[];
   const checkLogin = async () => {

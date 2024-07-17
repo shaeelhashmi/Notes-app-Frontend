@@ -28,6 +28,12 @@ export default function ShowNotes() {
     const {id}= useParams()
     const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
       const size:number=e.currentTarget.value.length;
+      if(size>20){
+        e.currentTarget.value = e.currentTarget.value.slice(0,20);
+        setError('Category or title cannot be more than 20 characters')
+      }else{
+        setError('')
+      }
       let value:string=e.currentTarget.value;
    for(let i=0;i<size-1;i++){
       if(value[i]===" " && value[i+1]===" "){
@@ -123,6 +129,7 @@ export default function ShowNotes() {
                 placeholder="Title"
                 function={CheckLetter}
                 required={true}
+                initialVal={data.title}
               />
               <div className="flex flex-col">
                 <div className="flex items-center mt-8">
@@ -135,6 +142,7 @@ export default function ShowNotes() {
                     name="description"
                     required
                     onChange={CheckLetter}
+                    defaultValue={data.content}
                   />
                 </div>
               </div>
@@ -195,7 +203,6 @@ export default function ShowNotes() {
     
 <div className='text-right '>Last updated:<i className='text-sm font-thin mx-7'>{convertDate(new Date (data.SubmissionDate))}</i></div>
         </div>
-   
         </div>
         </>}
         
