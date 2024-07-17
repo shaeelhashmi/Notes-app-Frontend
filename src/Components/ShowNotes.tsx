@@ -25,6 +25,7 @@ export default function ShowNotes() {
     const [show,setShow]=useState(false)
     const [error,setError]=useState('')
     const [PageError,setPageError]=useState(0)
+    const [delelePopup,setDeletePopup]=useState(false)
     const {id}= useParams()
     const CheckLetter=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
       const size:number=e.currentTarget.value.length;
@@ -103,6 +104,14 @@ export default function ShowNotes() {
       if(PageError===404){
         return <Page404></Page404>
       }
+      const formatContent = (content: string) => {
+        return content.split('\n').map((line, index) => (
+          <span key={index}>
+            {line}
+            <br />
+          </span>
+        ));
+      };
   return (
     <>
 
@@ -171,8 +180,29 @@ export default function ShowNotes() {
             </form>
           </div>
         </div>}
+        {
+          delelePopup&&    <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
+          <div className='w-[300px] h-[150px] bg-white p-4 rounded-xl'>
+            <p>Are you sure you want to delete this note</p>
+            <div className='flex place-content-center'>
+              <div ><button className='p-3 m-5 bg-red-700 w-[100px] text-white shadow1 transition-all duration-1000 rounded-lg hover:bg-red-600' onClick={async()=>{
+             try
+             {
+             await axios.delete('/DeleteNote',{ data: { id: data._id } })
+             nav("/")
+             }catch(err){
+              console.log(err)
+             }
+            }}>Yes</button></div>
+              <div ><button className='p-3 m-5 bg-green-700 w-[100px] text-white shadow1 transition-all duration-1000 rounded-lg hover:bg-green-600' onClick={()=>{
+              setDeletePopup(false)
+            }}>No</button></div>
+          
+            </div>
+          </div>
+        </div>
+        }
         <div className='mt-32 text-white mx-auto w-[80%]'>
-        {/* <h1 className='text-3xl'>{data.category}</h1> */}
         <div className='w-[100%]  bg-[#0400ff] mt-4 rounded-[2%] p-6 h-[540px]'>
          <div className='grid grid-cols-3 p-4'>
          <div className='items-center col-start-2 col-end-3 text-2xl font-bold text-center '>{data.title}</div>
@@ -186,21 +216,14 @@ export default function ShowNotes() {
             <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white' onClick={()=>{
               setShow(!show)
             }}>Edit note</button></div>
-            <div className={`flex justify-center    me-4  duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 rounded-b-lg `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white' onClick={async()=>{
-             try
-             {
-             await axios.delete('/DeleteNote',{ data: { id: data._id } })
-             nav("/")
-             }catch(err){
-              console.log(err)
-             }
+            <div className={`flex justify-center    me-4  duration-700 transition-all origin-top  bg-blue-700 p-2 w-full h-16 rounded-b-lg `}><button className='w-full p-2 text-center transition-all duration-700 border-b-2 border-blue-700 border-solid hover:border-white' onClick={()=>{
+              setDeletePopup(true)
             }}>Delete note</button></div>
             </div>
             </div>   
         <div className='overflow-y-auto h-[300px] col-span-3 my-6 mx-7' onClick={()=>{
             setShowMenu(true)
-        }}> {data.content}</div>
-    
+        }}> {formatContent(data.content)}</div>
 <div className='text-right '>Last updated:<i className='text-sm font-thin mx-7'>{convertDate(new Date (data.SubmissionDate))}</i></div>
         </div>
         </div>
