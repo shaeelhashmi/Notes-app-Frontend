@@ -83,10 +83,10 @@ export default function LoginForm() {
       <h1 className='font-serif text-3xl text-center mt-11'> Login</h1> 
       <form action="/login" method="post" onSubmit={SubmitForm}>
         <div className='flex flex-col'> 
-          <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange}></InputTags>
-          <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"} function={handlePass}></InputTags>
+          <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange} border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
+          <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"} function={handlePass} border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
         </div>
-        <div className='h-6 mt-5 text-sm text-red-300'>{error}</div>
+        <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
         <div className="flex">      
         <button type="submit" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[#0B032D]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[#11044d]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}>Login</button>
      
