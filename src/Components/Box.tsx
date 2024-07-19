@@ -23,7 +23,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`text-black  ${mode?"bg-[rgb(196_212_255)] border-[rgb(178_183_255)]":"bg-[rgb(51_108_255)] border-[#2a2aff71]"} 
+    <div className={`  ${mode?"bg-[rgb(196_212_255)] border-[rgb(178_183_255)] text-black":"bg-[rgb(0_25_90)] border-[#0000ff71] text-white"} 
     }  ${ expanded ? ' duration-700 ' : ' duration-1000 '
         }} transition-all ${isFirst ? 'border-t-4' : 'border-y-4'} ${lastEle ? 'border-b-4' : ''} border-solid  `}
     style={{ height: expanded ? `${67 + (note.Notes.length * 67)}px` : '67px' }}>
@@ -47,7 +47,7 @@ function Note({ note ,isFirst,lastEle}: { note: any ,isFirst: boolean,lastEle:bo
           return (
             <div
               key={subIndex}
-              className={`grid grid-cols-1 p-[10px] border-t-4 border-solid ${mode?"border-[rgb(178_183_255)]":"border-[#2a2aff71]"}  items-center place-content-center h-[60px]`}
+              className={`grid grid-cols-1 p-[10px] border-t-4 border-solid ${mode?"border-[rgb(178_183_255)]":"border-[#0000ff71]"}  items-center place-content-center h-[60px]`}
             >
               <div className='grid grid-cols-[1fr_1fr_1fr] p-2'>
                 <div>

@@ -121,7 +121,7 @@ export default function HomePage() {
     <>
       <NavBar/>
       <button
-        className={`flex items-center mx-auto my-12 text-center  ${mode?"bg-[rgb(172_180_255)] hover:bg-[rgb(184,191,255)] text-black":"bg-[rgb(0_24_227)] hover:bg-[rgb(0_24_240) text-white"} w-[300px] rounded-[10px] h-[50px] p-6        transition-all duration-1000 hover:cursor-pointer sm:mt-32 hover:shadow-xl mt-48 `}
+        className={`flex items-center mx-auto my-12 text-center  ${mode?"bg-[rgb(172_180_255)] hover:bg-[rgb(184,191,255)] text-black":"bg-[rgb(0_10_91)] hover:bg-[rgb(0_10_130)] text-white"} w-[300px] rounded-[10px] h-[50px] p-6        transition-all duration-1000 hover:cursor-pointer sm:mt-32 hover:shadow-xl mt-48 `}
         onClick={() => {
           setShowPopup(!showPopup);
           setError('');
