@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import InputTags from './InputTags'
 import {ChangeEvent,FormEvent,FormEventHandler} from 'react'
 import Page404 from './Page404'
+import { useSelector } from 'react-redux'
 interface Data{
   title:string,
   content:string,
@@ -15,6 +16,7 @@ interface Data{
   _id:string
 }
 export default function ShowNotes() {
+  const mode=useSelector((state:any)=>state.Mode.Mode)
   const nav=useNavigate()
   const convertDate = (date: Date) => {
     return date.toISOString().split('T')[0]
@@ -202,8 +204,8 @@ export default function ShowNotes() {
           </div>
         </div>
         }
-        <div className='mt-32 text-white mx-auto w-[80%]'>
-        <div className='w-[100%]  bg-[#0400ff] mt-4 rounded-[2%] p-6 h-[540px]'>
+        <div className='mt-32  mx-auto w-[80%]'>
+        <div className={`w-[100%]  ${mode?"bg-[#d7d7ff] text-black":" text-white bg-[rgb(1,0,91)]"} mt-4 rounded-[2%] p-6 h-[540px]`}>
          <div className='grid grid-cols-3 p-4'>
          <div className='items-center col-start-2 col-end-3 text-2xl font-bold text-center '>{data.title}</div>
             <div className='flex justify-end me-4'><button className='w-2' onClick={()=>{
