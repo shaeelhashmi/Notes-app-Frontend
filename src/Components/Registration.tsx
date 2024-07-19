@@ -22,7 +22,13 @@ export default function Registration() {
     const Form=e.currentTarget;
     let username = (Form.elements.namedItem('username') as HTMLInputElement).value;
     let password = (Form.elements.namedItem('password') as HTMLInputElement).value;
+    let CheckPass = (Form.elements.namedItem('CheckPass') as HTMLInputElement).value;
+
     e.preventDefault();
+    if(password!==CheckPass){
+      setError('Passwords do not match')
+      return;
+    }
     if(IsEmpty(username,password)){
       setError('Please fill all the fields')
       return;
@@ -31,6 +37,7 @@ export default function Registration() {
       setError('Username cannot be empty spaces')
       return;
     }
+    try{
     fetch('/register',{
       method:'POST',
       headers:{
@@ -40,13 +47,16 @@ export default function Registration() {
         username:username,
         password:password
       })
-    }).then(res => res.json())
+    }).then(res =>{
+      return res.json()})
     .then(data => {
       if(data.message==="User Created"){
         window.location.href='/login'
       }
       setError(data.message)
-    })
+    })}catch{
+          setError('Something went wrong')
+    } 
   }
   useEffect(() => {
     setError('');
@@ -83,8 +93,9 @@ export default function Registration() {
         <div className='flex flex-col'> 
           <InputTags name={"username"} label={"Username:"} type={"text"} placeholder={"Username"} function={handleChange}></InputTags>
           <InputTags name={"password"} label={"Password: "} type={"password"} placeholder={"Password"} function={handlePass}></InputTags>
+          <InputTags name={"CheckPass"} label={"Confirm password: "} type={"password"} placeholder={"Password"} function={handlePass}></InputTags>
         </div> 
-        <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
+        <div className='h-6 mt-5 text-sm text-red-500'>{error}</div>
         <div className="flex">
         <button type="submit" className='w-[300px] h-[50px] bg-[#0B032D] mt-6 mx-auto  transition-all duration-500 rounded-md text-white hover:bg-[#11044d]'>SignUp</button>
         </div>    
