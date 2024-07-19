@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 export default function LoginForm() {
   const [error,setError]=useState('')
   const mode=useSelector((state:any)=>state.Mode.Mode)
-  console.log(mode)
+
   const IsEmpty=(username:String,password:String):boolean=>{
     if(username.length===0 || password.length===0){
       return true

@@ -1,4 +1,5 @@
 import { FormEvent, FormEventHandler, useEffect, useState, ChangeEvent } from 'react';
+import { useSelector } from 'react-redux';
 import InputTags from './InputTags';
 import NavBar from './NavBar';
 import Plus from './SVG/Plus';
@@ -6,6 +7,7 @@ import Loader from './Loader.tsx'
 import Box from './Box.tsx';
 import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
+  const mode=useSelector((state:any)=>state.Mode.Mode);
   const navigate=useNavigate();
   const today = new Date();
   const tomorrow = new Date(today);
@@ -119,7 +121,7 @@ export default function HomePage() {
     <>
       <NavBar/>
       <button
-        className="flex items-center mx-auto my-12 text-center text-white bg-[rgb(0_24_227)] w-[300px] rounded-[10px] h-[50px] p-6       hover:bg-[rgb(0_24_240)] transition-all duration-1000 hover:cursor-pointer sm:mt-32 hover:shadow-xl mt-48"
+        className={`flex items-center mx-auto my-12 text-center  ${mode?"bg-[rgb(172_180_255)] hover:bg-[rgb(184,191,255)] text-black":"bg-[rgb(0_24_227)] hover:bg-[rgb(0_24_240) text-white"} w-[300px] rounded-[10px] h-[50px] p-6        transition-all duration-1000 hover:cursor-pointer sm:mt-32 hover:shadow-xl mt-48 `}
         onClick={() => {
           setShowPopup(!showPopup);
           setError('');
@@ -190,7 +192,7 @@ export default function HomePage() {
         </div>
                 
       )}
-      <h1 className='text-4xl text-center text-black'>Your Notes</h1>
+      <h1 className={`text-4xl text-center ${mode?"text-black":"text-white"}`}>Your Notes</h1>
       <div  className='text-white my-7'>
  <Box notes={notes}></Box>
 </div>
