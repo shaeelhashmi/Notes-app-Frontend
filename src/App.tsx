@@ -5,6 +5,7 @@ import Registration from './Components/Registration'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setName } from './Slice/GetUserName/UserName'
+import { setMode } from './Slice/SetLightMode/Mode'
 import axios from 'axios'
 import { useEffect } from 'react'
 import {valueTaken} from './Slice/ValuesTaken/Check'
@@ -27,6 +28,13 @@ function App() {
   }
   }
   useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      dispatch(setMode(false))
+      document.body.style.backgroundColor = '#00000C'
+      } else {
+      dispatch(setMode(true))
+      document.body.style.backgroundColor = 'rgb(249, 247, 247)'
+      }
     (async()=>{
       await setData()
     })();

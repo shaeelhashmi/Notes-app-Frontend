@@ -3,9 +3,11 @@ import {Link} from 'react-router-dom'
 import React,{ FormEvent,useEffect,useState } from 'react'
 import Google from './SVG/Google.tsx'
 import Side from './Side.tsx'
+import { useSelector } from 'react-redux'
 export default function LoginForm() {
   const [error,setError]=useState('')
-
+  const mode=useSelector((state:any)=>state.Mode.Mode)
+  console.log(mode)
   const IsEmpty=(username:String,password:String):boolean=>{
     if(username.length===0 || password.length===0){
       return true
@@ -72,11 +74,11 @@ export default function LoginForm() {
    }
   return (
     <div className='grid min-h-screen grid-cols-1 lg:grid-cols-2 color place-content-center ' >
-    <div className=' text-white  p-14 w-[550px]   h-full mx-auto'>
+    <div className={` ${mode?'text-black':'text-white'}  p-14 w-[550px]   h-full mx-auto`}>
     <h1 className='font-serif text-3xl text-center lg:hidden'>Welcome to Notes App 
         <br></br><span className='text-base'>An easy way to manage your notes Signup or login to continue</span></h1>
       <div className='flex'>
-      <a href="/auth/google/callback" className='mx-auto mt-6  bg-[#0B032D] w-[300px] h-[50px] text-center p-3 rounded-md hover:bg-[#11044d] transition-all duration-500 text-white justify-self-center'><Google></Google><span className='ms-5'>Login with Google</span></a>
+      <a href="/auth/google/callback" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[#0B032D]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[#11044d]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}><Google></Google><span className='ms-5'>Login with Google</span></a>
       </div>
       <h1 className='font-serif text-3xl text-center mt-11'> Login</h1> 
       <form action="/login" method="post" onSubmit={SubmitForm}>
@@ -86,7 +88,7 @@ export default function LoginForm() {
         </div>
         <div className='h-6 mt-5 text-sm text-red-300'>{error}</div>
         <div className="flex">      
-        <button type="submit" className='w-[300px] h-[50px] bg-[#0B032D] mt-6 mx-auto  transition-all duration-500 rounded-md text-white hover:bg-[#11044d] '>Login</button>
+        <button type="submit" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[#0B032D]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[#11044d]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}>Login</button>
      
         </div>    
       </form>

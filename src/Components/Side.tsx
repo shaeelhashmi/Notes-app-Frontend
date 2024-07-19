@@ -44,7 +44,7 @@ export default function Side() {
       },[])
   return (
     <div className='flex-col items-center justify-center hidden text-black lg:flex ' style={{ backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-    <h1 className='my-3 font-serif text-5xl '>Notes App</h1>
+    <h1 className='my-3 font-serif text-5xl '>Note Master</h1>
     <div className={`my-2 text-lg transition-all duration-200 ${change==="true"?'translate-x-0 opacity-100':'translate-x-minus-full  opacity-0'} text-black ${change==="null"?" translate-x-full opacity-0":"  "} animate2`} >{text}</div>
   </div>
   )
