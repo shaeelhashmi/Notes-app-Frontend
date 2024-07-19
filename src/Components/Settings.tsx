@@ -3,7 +3,9 @@ import InputTags from "./InputTags"
 import NavBar from "./NavBar"
 import axios from "axios"
 import Loader from "./Loader"
+import { useSelector } from "react-redux"
 export default function Settings() {
+    const mode=useSelector((state:any)=>state.Mode.Mode)
     const [error1,setError1]=useState('')
     const [error2,setError2]=useState('')
     const [popup,setPopup]=useState(false)
@@ -118,9 +120,9 @@ export default function Settings() {
         </div>}
     <NavBar></NavBar>
     <div className="grid grid-flow-row gap-4 mt-4">
-            <h1 className="mt-32 font-sans text-3xl font-bold text-center text-white">Settings</h1>
-        {!googleUser&&<div className="sm:w-[500px] w-[300px] text-white mx-auto my-12">
-            <h1 className="text-xl font-bold text-center">Change password</h1>
+            <h1 className={`mt-32 font-sans text-3xl font-bold text-center ${mode?"text-black":"text-white"}`}>Settings</h1>
+        {!googleUser&&<div className={`sm:w-[500px] w-[300px] ${mode?"text-black":"text-white"} mx-auto my-12`}>
+            <h1 className={`text-xl font-bold text-center `}>Change password</h1>
            <form onSubmit={async (e:FormEvent<HTMLFormElement>)=>{
                 try{
           e.preventDefault();
@@ -151,15 +153,15 @@ export default function Settings() {
                 <div className="h-5 my-5 text-center text-red-400">{error1}</div>
                 <div className="flex justify-center my-5">
                 
-                <button type="submit" className="w-[200px] h-[40px] mt-5 border-[#4C004B] border-4 border-solid 
-                 rounded-lg hover:bg-[#4C004B]  duration-1000 ">Change password</button>
+                <button type="submit" className={`w-[200px] h-[40px] mt-5 ${mode?"border-[#84a9ff] hover:bg-[#84a9ff]":"border-[#4C004B] hover:bg-[#4C004B]"} border-4 border-solid 
+                 rounded-lg   duration-1000`}>Change password</button>
                  </div>
                
             </form>
 
         </div>}
-                 <div className="sm:w-[500px] w-[300px] text-white mx-auto my-12">
-            <h1 className="text-xl font-bold text-center">Change username</h1>
+                 <div className={`${mode?"text-black":"text-white"} sm:w-[500px] w-[300px]  mx-auto my-12`}>
+            <h1 className={`text-xl font-bold text-center ${mode?"text-black":"text-white"}`}>Change username</h1>
             <form onSubmit={async(e:FormEvent<HTMLFormElement>)=>{
                 try{
                 e.preventDefault();
@@ -180,8 +182,8 @@ export default function Settings() {
                 type="text" placeholder="username" function={handleChange}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error2}</div>
                 <div className="flex justify-center my-5">
-                <button type="submit" className="w-[200px] h-[40px] mt-5 border-[#4C004B] border-4 border-solid 
-                 rounded-lg hover:bg-[#4C004B]  duration-1000 ">Change username</button>
+                <button type="submit" className={`w-[200px] h-[40px] mt-5 ${mode?"border-[#84a9ff] hover:bg-[#84a9ff]":"border-[#4C004B] hover:bg-[#4C004B]"} border-4 border-solid 
+                 rounded-lg   duration-1000`}>Change username</button>
                  </div>
             </form>
         </div>
