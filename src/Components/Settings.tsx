@@ -134,7 +134,7 @@ export default function Settings() {
                 setError1('Password cannot be empty')
                 return;
             }
-            if(password!==password2){
+            if(currPassword!==password2){
                 setError1('Passwords do not match')
                 return;
             }
@@ -144,11 +144,11 @@ export default function Settings() {
            setError1("An error occured") 
         }
             }}>
-                <InputTags name="password" label="New password:"
+                <InputTags name="currPassword" label="Current password:"
                 type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <InputTags name="password2" label="Confirm Password:"
                 type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
-                <InputTags name="currPassword" label="Current password:"
+                <InputTags name="password" label="New password:"
                 type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error1}</div>
                 <div className="flex justify-center my-5">
