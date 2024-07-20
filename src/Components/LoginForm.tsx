@@ -78,7 +78,7 @@ export default function LoginForm() {
     <h1 className='font-serif text-3xl text-center lg:hidden'>Welcome to Notes App 
         <br></br><span className='text-base'>An easy way to manage your notes Signup or login to continue</span></h1>
       <div className='flex'>
-      <a href="/auth/google/callback" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[rgb(28,0,126)]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[rgb(28,0,200)]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}><Google></Google><span className='ms-5'>Login with Google</span></a>
+      <a href="/auth/google/callback" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[rgb(28,0,126)]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[rgb(28,0,150)]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}><Google></Google><span className='ms-5'>Login with Google</span></a>
       </div>
       <h1 className='font-serif text-3xl text-center mt-11'> Login</h1> 
       <form action="/login" method="post" onSubmit={SubmitForm}>
@@ -88,7 +88,7 @@ export default function LoginForm() {
         </div>
         <div className='h-6 mt-5 text-sm text-red-700'>{error}</div>
         <div className="flex">      
-        <button type="submit" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[rgb(28,0,126)]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[rgb(28,0,200)]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}>Login</button>
+        <button type="submit" className={`mx-auto mt-6  ${mode?' bg-blue-300 ':'bg-[rgb(28,0,126)]'} w-[300px] h-[50px] text-center p-3 rounded-md ${mode?"hover:bg-blue-200":"hover:bg-[rgb(28,0,150)]"} transition-all duration-500 ${mode?"text-black":"text-white"} justify-self-center`}>Login</button>
      
         </div>    
       </form>
