@@ -214,11 +214,11 @@ export default function ShowNotes() {
             
             </div>
             <div className={`col-span-3 col-start-3 col-end-4 ${showMenu?"scale-y-0":"scale-y-100"} duration-1000 transition-all origin-top h-5 
- rounded-full me-4 w-[200px] justify-self-end`}>
-            <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  ${mode?"bg-blue-400":"bg-blue-900"} p-2 w-full h-16 `}><button className={`w-full p-2 text-center transition-all duration-700 border-b-2 ${mode?"border-blue-400":"border-blue-900"}  border-solid hover:border-white`} onClick={()=>{
+ rounded-xl me-4 w-[200px] justify-self-end`}>
+            <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  ${mode?"bg-white":"bg-blue-900"} p-2 w-full h-16 rounded-t-lg`}><button className={`w-full p-2 text-center transition-all duration-700 border-b-2 ${mode?"border-white":"border-blue-900"}  border-solid hover:border-black `} onClick={()=>{
               setShow(!show)
             }}>Edit note</button></div>
-            <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  ${mode?"bg-blue-400":"bg-blue-900"} p-2 w-full h-16 `}><button className={`w-full p-2 text-center transition-all duration-700 border-b-2 ${mode?"border-blue-400":"border-blue-900"}  border-solid hover:border-white`}onClick={()=>{
+            <div className={`flex justify-center   me-4 } duration-700 transition-all origin-top  ${mode?"bg-white":"bg-blue-900"} p-2 w-full h-16 rounded-b-lg`}><button className={`w-full p-2 text-center transition-all duration-700 border-b-2 ${mode?"border-white":"border-blue-900"}  border-solid hover:border-black `}onClick={()=>{
               setDeletePopup(true)
             }}>Delete note</button></div>
             </div>
