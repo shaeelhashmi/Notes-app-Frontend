@@ -174,8 +174,8 @@ export default function Settings() {
                 const res=await axios.patch("/updateusername",{username:username})
                 setError2(res.data.message)
                 location.reload();
-            }catch(err){
-                setError2("An error occured")
+            }catch(err:any){
+                setError2(err.response.data.message)
             }
             }}>
                 <InputTags name="userName" label="Username:"
