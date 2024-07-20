@@ -27,7 +27,7 @@ export default function NavBar() {
       method:'POST',
     }).then(()=>{
      navigate('/login');
-    })}} className={`w-[100px] transition-all duration-500 border-x-0  p-3  ${mode?"bg-[rgb(139_152_255)] hover:bg-[rgb(41,68,164)]":"bg-[rgb(24,19,84)] hover:bg-[rgb(24,19,200)] "} rounded-lg  `}>Logout</button>
+    })}} className={`w-[100px] transition-all duration-500 border-x-0  p-3  ${mode?"bg-[rgb(139_152_255)] hover:bg-[rgb(165,185,255)]":"bg-[rgb(24,19,84)] hover:bg-[rgb(24,19,200)] "} rounded-lg  `}>Logout</button>
           </div>
     </div>
   )

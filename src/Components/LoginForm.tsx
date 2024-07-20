@@ -92,7 +92,7 @@ export default function LoginForm() {
      
         </div>    
       </form>
-      <Link to="/signup" className='text-[0.6rem] mt-10'>Already have an account? Signup</Link>  
+      <Link to="/signup" className='text-[0.6rem] mt-10'>Dont have an account? Signup</Link>  
     </div>
   <Side></Side>
   </div>
