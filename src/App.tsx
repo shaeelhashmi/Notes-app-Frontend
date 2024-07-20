@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       dispatch(setMode(false))
-      document.body.style.backgroundColor = '#00000C'
+      document.body.style.backgroundColor = 'rgb(5 ,5 ,58)'
       } else {
       dispatch(setMode(true))
       document.body.style.backgroundColor = 'rgb(249, 247, 247)'

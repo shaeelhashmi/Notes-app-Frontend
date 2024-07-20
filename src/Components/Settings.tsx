@@ -145,11 +145,11 @@ export default function Settings() {
         }
             }}>
                 <InputTags name="password" label="New password:"
-                type="password" placeholder="Password" function={handlePass}></InputTags>
+                type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <InputTags name="password2" label="Confirm Password:"
-                type="password" placeholder="Password" function={handlePass}></InputTags>
+                type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <InputTags name="currPassword" label="Current password:"
-                type="password" placeholder="Password" function={handlePass}></InputTags>
+                type="password" placeholder="Password" function={handlePass}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error1}</div>
                 <div className="flex justify-center my-5">
                 
@@ -179,7 +179,7 @@ export default function Settings() {
             }
             }}>
                 <InputTags name="userName" label="Username:"
-                type="text" placeholder="username" function={handleChange}></InputTags>
+                type="text" placeholder="username" function={handleChange}  border={mode?"border-b-2 border-solid border-black":" "}></InputTags>
                 <div className="h-5 my-5 text-center text-red-400">{error2}</div>
                 <div className="flex justify-center my-5">
                 <button type="submit" className={`w-[200px] h-[40px] mt-5 ${mode?"border-[#84a9ff] hover:bg-[#84a9ff]":"border-[#4C004B] hover:bg-[#4C004B]"} border-4 border-solid 
